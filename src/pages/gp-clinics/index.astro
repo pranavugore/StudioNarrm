@@ -2,11 +2,11 @@
 import Base from "../../layouts/Base.astro";
 import ServiceArt from "../../components/ServiceArt.astro";
 import { SITE } from "../../data/site.js";
-import { GP, SOURCES, RULE21, PACKAGE, PLANS, FOUNDING, STEPS, TRUST, GP_FAQ, CHECK, money } from "../../data/gp.js";
+import { GP, SOURCES, RULE21, PACKAGE, PLANS, SIZE, FOUNDING, FUNDING, STEPS, TRUST, GP_FAQ, CHECK, money } from "../../data/gp.js";
 const origin = Astro.site.href.replace(/\/$/, "");
 const url = origin + GP.href;
 const title = "Rule 21 and fax-free for GP clinics | Studio Narrm, Victoria";
-const description = "Fixed-fee help for regional and rural GP clinics in Victoria: your My Health Record Security and Access Policy (Rule 21), basic security and secure messaging instead of fax. $3,500 + GST.";
+const description = "Fixed-fee help for regional and rural GP clinics in Victoria: your My Health Record Security and Access Policy (Rule 21), basic security and secure messaging instead of fax. Fixed fee from $3,800 + GST.";
 const mail = (subject) => "mailto:" + SITE.email + "?subject=" + encodeURIComponent(subject);
 const offer = (p) => ({
   "@type": "Offer",
@@ -75,8 +75,9 @@ const jsonld = [
 
     <section class="section" id="package" aria-labelledby="pkg-h">
       <div class="wrap">
-        <div class="section-head"><div><span class="eyebrow">The package</span><h2 id="pkg-h">One fixed fee, three things done</h2></div></div>
-        <ul class="offer">
+        <div class="section-head"><div><span class="eyebrow">What's included</span><h2 id="pkg-h">Four things done in every package</h2></div>
+          <p>The Turnkey package adds live training for all staff, retiring fax for your busiest contacts, a backup restore test and 30 days of support.</p></div>
+        <ul class="offer four">
           {PACKAGE.map(([n, d], k) => <li class="reveal"><span class="n mono">{String(k + 1).padStart(2, "0")}</span><h3>{n}</h3><p>{d}</p></li>)}
         </ul>
       </div>
@@ -84,10 +85,11 @@ const jsonld = [
 
     <section class="section" id="pricing" aria-labelledby="price-h">
       <div class="wrap">
-        <div class="section-head"><div><span class="eyebrow">Pricing</span><h2 id="price-h">Clear prices, no surprises</h2></div><p>All prices exclude GST.</p></div>
-        <div class="plans">
+        <div class="section-head"><div><span class="eyebrow">Pricing</span><h2 id="price-h">Clear prices, no surprises</h2></div><p>All prices exclude GST. {SIZE}</p></div>
+        <div class="plans three">
           {PLANS.map((p, k) => (
-            <article class={"plan" + (k === 0 ? " main" : "")}>
+            <article class={"plan" + (k === 1 ? " main" : "")}>
+              {k === 1 && <span class="badge">Most complete</span>}
               <h3>{p.name}</h3>
               <p class="price"><b>{money(p.price)}</b> <span>+ GST {p.unit}</span></p>
               <ul>{p.items.map((it) => <li>{it}</li>)}</ul>
@@ -97,9 +99,19 @@ const jsonld = [
         </div>
         <aside class="founding">
           <span class="badge">Founding clinics</span>
-          <p><b>The first {FOUNDING.places} clinics get the package for {money(FOUNDING.price)} + GST</b> in return for a short testimonial and a case study we can share once the work is done.</p>
+          <p><b>The first {FOUNDING.places} clinics get a founding price: {PLANS.filter((p) => p.founding).map((p) => `${p.name} for ${money(p.founding)}`).join(", or ")} + GST</b>, in return for a short testimonial and a case study we can share once the work is done.</p>
           <a class="btn tone small" href={mail("Founding clinic offer")}>Ask about a founding place</a>
         </aside>
+      </div>
+    </section>
+
+    <section class="section" id="funding" aria-labelledby="fund-h">
+      <div class="wrap">
+        <div class="section-head"><div><span class="eyebrow">Funding</span><h2 id="fund-h">Help with the cost</h2></div>
+          <p>We can't promise funding, but these are worth checking before you start.</p></div>
+        <ul class="offer two">
+          {FUNDING.map(([n, d, src]) => <li class="reveal"><h3>{n}</h3><p>{d}</p><p class="src-note">Source: <a href={SOURCES[src][1]} rel="noopener">{SOURCES[src][0]}</a></p></li>)}
+        </ul>
       </div>
     </section>
 

@@ -395,11 +395,17 @@ fieldset input { width: auto; accent-color: var(--accent); }
 
 /* GP clinics page, Rule 21 self-check and guide */
 .offer.four { grid-template-columns: repeat(4, 1fr); }
+.offer.two { grid-template-columns: 1fr 1fr; }
+@media (max-width: 560px) { .offer.two { grid-template-columns: 1fr; } }
 .section-head p a, .src-note a { color: var(--tone, var(--accent-text)); }
 .src-note { margin-top: 1.5rem; font-size: 0.9rem; color: var(--muted); max-width: 60rem; }
 .plans { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
 .plan { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 1.8rem; display: flex; flex-direction: column; }
 .plan.main { border: 2px solid var(--tone); }
+.plans.three { grid-template-columns: repeat(3, 1fr); }
+@media (max-width: 64rem) { .plans.three { grid-template-columns: 1fr; } }
+.plan .badge { align-self: flex-start; margin-bottom: 0.6rem; }
+#funding .src-note { margin-top: 0.8rem; font-size: 0.88rem; }
 .plan h3 { font-size: 1.25rem; }
 .plan .price { margin: 0.8rem 0 1rem; }
 .plan .price b { font-family: var(--f-display); font-size: 2.6rem; letter-spacing: -0.02em; }

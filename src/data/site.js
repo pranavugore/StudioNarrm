@@ -17,7 +17,7 @@ export const SITE = {
   country: "AU",
   description:
     "Solution Designer and Architect with 19 years of experience building enterprise applications, integrations, data analytics solutions and workflow automation.",
-  updated: "2026-10-22",
+  updated: "2026-10-27",
 };
 
 // Topics the studio works in, for knowsAbout. Keep to capabilities, not clients.
@@ -67,7 +67,7 @@ export function org(origin) {
         })),
         ...(SHOW_GP ? [{
           "@type": "Offer",
-          itemOffered: { "@type": "Service", "@id": origin + "/gp-clinics/#service", name: "Rule 21 and fax-free package for GP clinics", url: origin + "/gp-clinics/" },
+          itemOffered: { "@type": "Service", "@id": origin + "/gp-clinics/#service", name: "Rule 21 and fax-free packages for GP clinics", url: origin + "/gp-clinics/" },
         }] : []),
       ],
     },

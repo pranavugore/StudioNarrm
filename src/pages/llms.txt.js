@@ -26,7 +26,7 @@ Last updated: ${SITE.updated}. Every page below is linked as Markdown; drop "ind
 
 - Small businesses, teams and non-profits that want to stop doing repetitive work by hand and see their numbers clearly.
 - Larger organisations that need solution architecture and design for integration, data and automation.
-${SHOW_GP ? `- General practices in Victoria, especially regional and rural clinics: putting the My Health Record Security and Access Policy (Rule 21) in place, and replacing fax and email referrals with secure messaging inside their existing practice software. Fixed-fee package $3,500 + GST (up to about 10 staff), optional monthly care plan $390 + GST. Details: [GP clinics](${md("/gp-clinics/")}).
+${SHOW_GP ? `- General practices in Victoria, especially regional and rural clinics: putting the My Health Record Security and Access Policy (Rule 21) in place, and replacing fax and email referrals with secure messaging inside their existing practice software. Two fixed-fee packages for practices with 1 to 5 GPs: Essential compliance and security $3,800 + GST, Turnkey fax-free $5,800 + GST (founding price for the first three clinics $3,200 / $4,900), optional monthly care plan $390 + GST. Details: [GP clinics](${md("/gp-clinics/")}).
 ` : ""}
 Based in Melbourne, Victoria, Australia. Works across Australia, remotely or in person.
 
@@ -46,7 +46,7 @@ ${services}
 ## Pages
 - [Home](${md("/")}): overview, services, approach, FAQ, contact
 - [Work](${md("/work/")}): case studies in AI agents, n8n data pipelines, analytics, banking integration and migration, RPA and telecom fulfilment
-${SHOW_GP ? `- [GP clinics](${md("/gp-clinics/")}): Rule 21 and fax-free package for GP clinics, prices, Rule 21 self-check, FAQ
+${SHOW_GP ? `- [GP clinics](${md("/gp-clinics/")}): Rule 21 and fax-free packages for GP clinics, prices, funding, Rule 21 self-check, FAQ
 - [Rule 21 guide](${md("/gp-clinics/rule-21-guide/")}): plain-English guide to the My Health Record Security and Access Policy for small practices, with official sources
 ` : ""}- [About](${md("/about/")}): career timeline, certifications, education
 

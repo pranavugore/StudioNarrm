@@ -7,4 +7,4 @@
 // - the menu and footer links, home banner, hero slide, contact-form clinic fields,
 //   home FAQ answer, Automation page items, llms.txt lines and structured data are left out
 // Set to true to bring it all back.
-export const SHOW_GP = false;
+export const SHOW_GP = true;
