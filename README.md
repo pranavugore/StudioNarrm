@@ -35,6 +35,14 @@ npm run preview   # serves the built dist/ folder
 
 The sitemap (`sitemap-index.xml`) is generated automatically on every build.
 
+## How it deploys today
+
+The live site is a Cloudflare **Worker** (studionarrm) connected to this repo with Workers Builds. Every push to `main` runs `npm run build` then `npx wrangler deploy`, which serves `dist/` as static assets on studionarrm.com. There is no `wrangler.jsonc`; Wrangler works the settings out from the Astro project.
+
+Preview builds for other branches are switched off (Settings → Build → Previews → "Builds for Preview branches"). Cloudflare's preview command, `npx wrangler preview`, needs a `wrangler.jsonc` with a `previews` block, which this repo doesn't have. Adding that file would also change how `main` deploys, so do it as its own change if previews are ever wanted.
+
+The steps below are the original first-time setup notes.
+
 ## Deploy to Cloudflare Pages
 
 1. Put this folder in a GitHub (or GitLab) repository.
