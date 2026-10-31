@@ -1,40 +1,20 @@
 ---
 import Base from "../../layouts/Base.astro";
-const origin = Astro.site.href.replace(/\/$/, "");
+import { originOf, breadcrumbs, ld } from "../../lib/schema.js";
+const origin = originOf(Astro.site);
 const title = "Work and Case Studies | Studio Narrm, Melbourne";
 const description = "Case studies from Studio Narrm founder Pranav Gore: AI agents, n8n data pipelines, analytics dashboards, banking integration and migration, RPA and telecom fulfilment architecture.";
-const jsonld = [{
-  "@context": "https://schema.org",
+// dateModified is stamped by Base from SITE.updated.
+const jsonld = [ld({
   "@type": "CollectionPage",
-  "name": "Work and case studies",
-  "url": `${origin}/work/`,
-  "dateModified": "2026-10-11",
-  "author": {
-    "@id": `${origin}/#person`
-  },
-  "about": {
-    "@id": `${origin}/#person`
-  },
-  "breadcrumb": {
-    "@type": "BreadcrumbList",
-    "itemListElement": [
-      {
-        "@type": "ListItem",
-        "position": 1,
-        "name": "Home",
-        "item": `${origin}/`
-      },
-      {
-        "@type": "ListItem",
-        "position": 2,
-        "name": "Work",
-        "item": `${origin}/work/`
-      }
-    ]
-  }
-}];
+  name: "Work and case studies",
+  url: `${origin}/work/`,
+  author: { "@id": `${origin}/#person` },
+  about: { "@id": `${origin}/#person` },
+  breadcrumb: breadcrumbs(origin, [["Home", "/"], ["Work", "/work/"]]),
+})];
 ---
-<Base title={title} description={description} jsonld={jsonld} current="work" includeBase={true}>
+<Base title={title} description={description} jsonld={jsonld} current="work">
 <main class="wrap-main">
     <section class="page-hero">
       <div class="wrap">

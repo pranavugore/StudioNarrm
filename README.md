@@ -20,6 +20,10 @@ npm run preview   # serves the built dist/ folder
 | `src/data/site.js` | Name, job title, email, LinkedIn, location, last-updated date |
 | `src/data/flags.js` | On/off switches. `SHOW_GP = false` hides the GP clinics offer everywhere; set it to `true` and rebuild to bring it back |
 | `src/layouts/Base.astro` | Shared `<head>`: title, description, canonical, Open Graph, JSON-LD |
+| `src/data/services.js` | Every service: home panel, page content, slide caption (`tags`), llms.txt line (`blurb`). `hidden: true` hides one everywhere, page included |
+| `src/data/gp.js` | GP clinic offer. Prices live only in `PLANS`; the page, FAQ, guide, JSON-LD and llms.txt read them from there (regenerate the PDF by hand) |
+| `src/pages/[service]/index.astro` | Builds `/automation/`, `/agent-ready/`, `/custom-apps/` (any visible service with page content) from `src/layouts/ServicePage.astro` |
+| `src/lib/schema.js`, `src/lib/format.js` | Shared JSON-LD builders (site, studio, founder, breadcrumbs) and small formatters (dates, prices, step numbers) |
 | `src/components/Header.astro`, `Footer.astro` | Navigation and footer, shared by every page |
 | `src/pages/index.astro` | Home page |
 | `src/pages/data-viz/index.astro` | Dashboard and ten interactive charts (sample data) |

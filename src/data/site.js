@@ -29,6 +29,13 @@ export const KNOWS_ABOUT = [
   ...(SHOW_GP ? ["My Health Record Security and Access Policy", "Secure messaging for general practice"] : []),
 ];
 
+// Extra founder detail for the home page's Person node (see src/pages/index.astro).
+export const FOUNDER_PROFILE = {
+  alumniOf: { "@type": "CollegeOrUniversity", name: "NMAM Institute of Technology (Visvesvaraya Technological University)" },
+  hasCredential: ["AWS Certified Solutions Architect – Associate", "SAFe Scrum Master", "ITIL Foundation"].map((name) => ({ "@type": "EducationalOccupationalCredential", name, credentialCategory: "certification" })),
+  knowsAbout: ["Solution architecture", "System design", "Enterprise integration", "Microservices", "Event-driven architecture", "Apache Kafka", "IBM MQ", "Spring Boot", "AWS", "Open Banking", "Master data management", "Data analytics", "Dashboards", "Looker Studio", "Workflow automation", "n8n", "AI agents", "Large language models", "Anthropic Claude API", "ETL", "PostgreSQL", "REST APIs", "Robotic process automation", "Low-code development", "Google AppSheet", "AI-assisted software development", "Claude Code", "Cursor", "Oracle OSM", "Oracle UIM", "Order management and fulfilment", "Machine learning", "Agile delivery", "SAFe", "Product design", "Full-stack development", "Mobile app development"],
+};
+
 // Organization node for JSON-LD, shared by every page's @graph.
 export function org(origin) {
   return {

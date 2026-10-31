@@ -2,23 +2,24 @@
 import Base from "../../layouts/Base.astro";
 import ServiceArt from "../../components/ServiceArt.astro";
 import { SITE } from "../../data/site.js";
-import { GP, SOURCES, RULE21, PACKAGE, PLANS, SIZE, FOUNDING, FUNDING, STEPS, TRUST, GP_FAQ, CHECK, money } from "../../data/gp.js";
-const origin = Astro.site.href.replace(/\/$/, "");
+import { GP, SOURCES, RULE21, PACKAGE, PLANS, SIZE, FOUNDING, FUNDING, STEPS, TRUST, GP_FAQ, CHECK, FROM_PRICE } from "../../data/gp.js";
+import { originOf, breadcrumbs, ld } from "../../lib/schema.js";
+import { two, money } from "../../lib/format.js";
+const origin = originOf(Astro.site);
 const url = origin + GP.href;
 const title = "Rule 21 and fax-free for GP clinics | Studio Narrm, Victoria";
-const description = "Fixed-fee help for regional and rural GP clinics in Victoria: your My Health Record Security and Access Policy (Rule 21), basic security and secure messaging instead of fax. Fixed fee from $3,800 + GST.";
+const description = `Fixed-fee help for regional and rural GP clinics in Victoria: your My Health Record Security and Access Policy (Rule 21), basic security and secure messaging instead of fax. Fixed fee from ${FROM_PRICE} + GST.`;
 const mail = (subject) => "mailto:" + SITE.email + "?subject=" + encodeURIComponent(subject);
 const offer = (p) => ({
   "@type": "Offer",
   name: p.name,
   price: p.price,
   priceCurrency: "AUD",
-  priceSpecification: { "@type": "UnitPriceSpecification", price: p.price, priceCurrency: "AUD", valueAddedTaxIncluded: false, ...(p.price < 1000 ? { unitText: "month", billingDuration: "P12M" } : {}) },
+  priceSpecification: { "@type": "UnitPriceSpecification", price: p.price, priceCurrency: "AUD", valueAddedTaxIncluded: false, ...(p.monthly ? { unitText: "month", billingDuration: "P12M" } : {}) },
   itemOffered: { "@type": "Service", name: p.name, description: p.items.join("; ") },
 });
 const jsonld = [
-  {
-    "@context": "https://schema.org",
+  ld({
     "@type": "Service",
     "@id": url + "#service",
     name: "Rule 21 and fax-free package for GP clinics",
@@ -29,21 +30,13 @@ const jsonld = [
     audience: { "@type": "BusinessAudience", name: "General practices and GP clinics in regional and rural Victoria" },
     areaServed: [{ "@type": "State", name: "Victoria, Australia" }, "Gippsland", "Western Victoria", "Murray region"],
     offers: PLANS.map(offer),
-  },
-  {
-    "@context": "https://schema.org",
+  }),
+  ld({
     "@type": "FAQPage",
     "@id": url + "#faq",
     mainEntity: GP_FAQ.map(([q, a]) => ({ "@type": "Question", name: q, acceptedAnswer: { "@type": "Answer", text: a } })),
-  },
-  {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: origin + "/" },
-      { "@type": "ListItem", position: 2, name: "GP clinics", item: url },
-    ],
-  },
+  }),
+  ld(breadcrumbs(origin, [["Home", "/"], ["GP clinics", GP.href]])),
 ];
 ---
 <Base title={title} description={description} jsonld={jsonld} current="gp-clinics">
@@ -67,7 +60,7 @@ const jsonld = [
         <div class="section-head"><div><span class="eyebrow">What changed</span><h2 id="r21-h">What Rule 21 asks of your practice</h2></div>
           <p>The Australian Digital Health Agency may check that your policy is in place and working. Here's what it needs to cover, in plain words. Read our <a href={GP.guideHref}>Rule 21 guide for small practices</a> for more.</p></div>
         <ul class="offer four">
-          {RULE21.map(([n, d], k) => <li class="reveal"><span class="n mono">{String(k + 1).padStart(2, "0")}</span><h3>{n}</h3><p>{d}</p></li>)}
+          {RULE21.map(([n, d], k) => <li class="reveal"><span class="n mono">{two(k)}</span><h3>{n}</h3><p>{d}</p></li>)}
         </ul>
         <p class="src-note">Sources: {SOURCES.slice(0, 3).map(([n, u], k) => <>{k ? " · " : ""}<a href={u} rel="noopener">{n}</a></>)}. Many practices also still rely on fax for referrals and results, which is why <a href={SOURCES[3][1]} rel="noopener">primary health networks</a> are pushing secure messaging instead.</p>
       </div>
@@ -78,7 +71,7 @@ const jsonld = [
         <div class="section-head"><div><span class="eyebrow">What's included</span><h2 id="pkg-h">Four things done in every package</h2></div>
           <p>The Turnkey package adds live training for all staff, retiring fax for your busiest contacts, a backup restore test and 30 days of support.</p></div>
         <ul class="offer four">
-          {PACKAGE.map(([n, d], k) => <li class="reveal"><span class="n mono">{String(k + 1).padStart(2, "0")}</span><h3>{n}</h3><p>{d}</p></li>)}
+          {PACKAGE.map(([n, d], k) => <li class="reveal"><span class="n mono">{two(k)}</span><h3>{n}</h3><p>{d}</p></li>)}
         </ul>
       </div>
     </section>
@@ -129,7 +122,7 @@ const jsonld = [
         <div class="section-head"><div><span class="eyebrow">How it works</span><h2 id="how-h">From first call to done</h2></div>
           <p>Remote set-up means distance isn't a problem. We work with clinics across {GP.regions.slice(0, -1).join(", ")} and {GP.regions.at(-1)}.</p></div>
         <ol class="steps four">
-          {STEPS.map(([h, p], k) => <li class="reveal"><span class="n">{String(k + 1).padStart(2, "0")}</span><h3>{h}</h3><p>{p}</p></li>)}
+          {STEPS.map(([h, p], k) => <li class="reveal"><span class="n">{two(k)}</span><h3>{h}</h3><p>{p}</p></li>)}
         </ol>
       </div>
     </section>

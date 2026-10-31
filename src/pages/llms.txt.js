@@ -1,21 +1,18 @@
 import { SERVICES } from "../data/services.js";
 import { SITE } from "../data/site.js";
 import { SHOW_GP } from "../data/flags.js";
+import { GP, PACKAGES, CARE_PLAN, FOUNDING } from "../data/gp.js";
+import { originOf } from "../lib/schema.js";
+import { money, numberWord } from "../lib/format.js";
 
-const BLURBS = {
-  "data-viz": "dashboards, data pipelines and interactive data stories, with live examples",
-  automation: "workflow automation (n8n), robotic process automation, system sync and scheduled reporting",
-  "agent-ready": "AI visibility (AEO/GEO), structured data, llms.txt, APIs and MCP servers for AI agents, internal AI agents",
-  "custom-apps": "custom websites, AppSheet and low-code apps, web and mobile apps, portals and product MVPs",
-  "video-ads": "short-form video ads, script to edit, cut for every platform",
-  "marketing-outreach": "AI-assisted prospect research, personalised email outreach, follow-ups and reporting",
-};
+const [ESSENTIAL, TURNKEY] = PACKAGES;
+const gpPrices = `Two fixed-fee packages for practices with 1 to 5 GPs: ${ESSENTIAL.name} ${money(ESSENTIAL.price)} + GST, ${TURNKEY.name} ${money(TURNKEY.price)} + GST (founding price for the first ${numberWord(FOUNDING.places)} clinics ${money(ESSENTIAL.founding)} / ${money(TURNKEY.founding)}), optional ${CARE_PLAN.name.toLowerCase()} ${money(CARE_PLAN.price)} + GST.`;
 
 // Each link points at the page's Markdown copy (built by integrations/agent-files.mjs); the HTML page is the same URL without index.md.
 export function GET({ site }) {
-  const origin = site.href.replace(/\/$/, "");
+  const origin = originOf(site);
   const md = (path) => `${origin}${path}index.md`;
-  const services = SERVICES.map((sv) => `- [${sv.eyebrow}](${md(sv.href)}): ${BLURBS[sv.slug]}\n`).join("");
+  const services = SERVICES.map((sv) => `- [${sv.eyebrow}](${md(sv.href)}): ${sv.blurb}\n`).join("");
   return new Response(`# ${SITE.brand}
 
 > ${SITE.brand} (${origin}) is a Melbourne studio that designs and builds data dashboards, workflow automation, AI agents, custom apps and websites, and helps businesses get ready for AI search and AI agents. It was founded by ${SITE.name}, a Melbourne-based Solution Designer and Architect with 19 years of experience in enterprise integration, data analytics dashboards and AI agents and workflow automation (50+ production n8n workflows, ETL into PostgreSQL, LLM agents with Claude, RPA, low-code), across banking, telecommunications, retail and non-profit organisations. AWS Certified Solutions Architect – Associate.
@@ -26,7 +23,7 @@ Last updated: ${SITE.updated}. Every page below is linked as Markdown; drop "ind
 
 - Small businesses, teams and non-profits that want to stop doing repetitive work by hand and see their numbers clearly.
 - Larger organisations that need solution architecture and design for integration, data and automation.
-${SHOW_GP ? `- General practices in Victoria, especially regional and rural clinics: putting the My Health Record Security and Access Policy (Rule 21) in place, and replacing fax and email referrals with secure messaging inside their existing practice software. Two fixed-fee packages for practices with 1 to 5 GPs: Essential compliance and security $3,800 + GST, Turnkey fax-free $5,800 + GST (founding price for the first three clinics $3,200 / $4,900), optional monthly care plan $390 + GST. Details: [GP clinics](${md("/gp-clinics/")}).
+${SHOW_GP ? `- General practices in Victoria, especially regional and rural clinics: putting the My Health Record Security and Access Policy (Rule 21) in place, and replacing fax and email referrals with secure messaging inside their existing practice software. ${gpPrices} Details: [GP clinics](${md(GP.href)}).
 ` : ""}
 Based in Melbourne, Victoria, Australia. Works across Australia, remotely or in person.
 
@@ -46,8 +43,8 @@ ${services}
 ## Pages
 - [Home](${md("/")}): overview, services, approach, FAQ, contact
 - [Work](${md("/work/")}): case studies in AI agents, n8n data pipelines, analytics, banking integration and migration, RPA and telecom fulfilment
-${SHOW_GP ? `- [GP clinics](${md("/gp-clinics/")}): Rule 21 and fax-free packages for GP clinics, prices, funding, Rule 21 self-check, FAQ
-- [Rule 21 guide](${md("/gp-clinics/rule-21-guide/")}): plain-English guide to the My Health Record Security and Access Policy for small practices, with official sources
+${SHOW_GP ? `- [GP clinics](${md(GP.href)}): Rule 21 and fax-free packages for GP clinics, prices, funding, Rule 21 self-check, FAQ
+- [Rule 21 guide](${md(GP.guideHref)}): plain-English guide to the My Health Record Security and Access Policy for small practices, with official sources
 ` : ""}- [About](${md("/about/")}): career timeline, certifications, education
 
 ## Optional

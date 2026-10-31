@@ -3,10 +3,12 @@ import Base from "./Base.astro";
 import ServiceArt from "../components/ServiceArt.astro";
 import { SERVICES } from "../data/services.js";
 import { SITE } from "../data/site.js";
+import { originOf, breadcrumbs, ld } from "../lib/schema.js";
+import { two } from "../lib/format.js";
 const { slug } = Astro.props;
 const s = SERVICES.find((x) => x.slug === slug);
 const plain = (h) => h.replace(/<[^>]+>/g, "");
-const origin = Astro.site.href.replace(/\/$/, "");
+const origin = originOf(Astro.site);
 const url = origin + s.href;
 const title = `${s.eyebrow} | ${SITE.brand}, ${SITE.city}`;
 const description = s.summary;
@@ -22,14 +24,7 @@ const jsonld = [
     areaServed: [{ "@type": "Country", name: "Australia" }, "Remote worldwide"],
     hasOfferCatalog: { "@type": "OfferCatalog", name: s.eyebrow, itemListElement: s.page.offer.map(([n, d]) => ({ "@type": "Offer", itemOffered: { "@type": "Service", name: n, description: d } })) },
   },
-  {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: origin + "/" },
-      { "@type": "ListItem", position: 2, name: s.eyebrow, item: url },
-    ],
-  },
+  ld(breadcrumbs(origin, [["Home", "/"], [s.eyebrow, s.href]])),
 ];
 const others = SERVICES.filter((x) => x.slug !== slug);
 const steps = [
@@ -59,7 +54,7 @@ const steps = [
       <div class="wrap">
         <div class="section-head"><div><span class="eyebrow">What we can do</span><h2 id="what-h">{plain(s.title)}, end to end</h2></div></div>
         <ul class="offer">
-          {s.page.offer.map(([n, d], k) => <li class="reveal"><span class="n mono">{String(k + 1).padStart(2, "0")}</span><h3>{n}</h3><p>{d}</p></li>)}
+          {s.page.offer.map(([n, d], k) => <li class="reveal"><span class="n mono">{two(k)}</span><h3>{n}</h3><p>{d}</p></li>)}
         </ul>
       </div>
     </section>
@@ -88,7 +83,7 @@ const steps = [
       <div class="wrap">
         <div class="section-head"><div><span class="eyebrow">How it works</span><h2 id="how-h">Simple, visible, no surprises</h2></div></div>
         <ol class="steps four">
-          {steps.map(([h, p], k) => <li class="reveal"><span class="n">{String(k + 1).padStart(2, "0")}</span><h3>{h}</h3><p>{p}</p></li>)}
+          {steps.map(([h, p], k) => <li class="reveal"><span class="n">{two(k)}</span><h3>{h}</h3><p>{p}</p></li>)}
         </ol>
       </div>
     </section>

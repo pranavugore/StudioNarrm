@@ -1,5 +1,8 @@
 // GP clinic offer: one source for the /gp-clinics/ page, its structured data, the Rule 21 self-check and llms.txt.
-// Prices are ex GST. Keep wording to "help you meet" Rule 21; never promise compliance.
+// Prices are ex GST and live only in PLANS: the page, FAQ, guide, JSON-LD and llms.txt all read them from here.
+// The one-page PDF in public/gp-clinics/ is made separately (previews/gp-clinics/make-offer-pdf.mjs), so
+// regenerate it when prices change. Keep wording to "help you meet" Rule 21; never promise compliance.
+import { money, numberWord } from "../lib/format.js";
 
 export const GP = {
   href: "/gp-clinics/",
@@ -69,6 +72,7 @@ export const PLANS = [
   {
     name: "Monthly care plan",
     price: 390,
+    monthly: true,
     unit: "per month, 12-month term",
     note: "Starts after either package, so the work stays done.",
     items: [
@@ -80,10 +84,16 @@ export const PLANS = [
   },
 ];
 
+// The two fixed-fee packages, the monthly plan, and the lowest package price ("from $3,800").
+export const PACKAGES = PLANS.filter((p) => !p.monthly);
+export const CARE_PLAN = PLANS.find((p) => p.monthly);
+export const FROM_PRICE = money(Math.min(...PACKAGES.map((p) => p.price)));
+
 // Both packages are sized for this; larger practices are quoted after the free check.
 export const SIZE = "Both packages are for practices with 1 to 5 GPs and 3 to 8 staff. Larger practices are quoted after the free check.";
 
 export const FOUNDING = { places: 3 };
+const [ESSENTIAL, TURNKEY] = PACKAGES;
 
 // Funding: only what the official sources say. Never promise a grant or claim lost payments.
 export const FUNDING = [
@@ -108,7 +118,7 @@ export const TRUST = [
 export const GP_FAQ = [
   ["What is Rule 21?", "Rule 21 of the My Health Records Rules 2026 says that, from 1 October 2026, every healthcare provider organisation that uses My Health Record must have a written Security and Access Policy. It covers managing user access, staff training and handling My Health Record data breaches, and the Australian Digital Health Agency may check that it is in place."],
   ["Does a small practice need one?", "Yes. The rule applies to every organisation that participates in My Health Record, regardless of size."],
-  ["What does it cost?", "There are two fixed-fee packages for practices with 1 to 5 GPs and 3 to 8 staff: Essential compliance and security at $3,800 plus GST, and Turnkey fax-free at $5,800 plus GST. The first three clinics get a founding price of $3,200 or $4,900. The optional monthly care plan is $390 plus GST a month on a 12-month term. Larger practices are quoted after the free check."],
+  ["What does it cost?", `There are two fixed-fee packages for practices with 1 to 5 GPs and 3 to 8 staff: ${ESSENTIAL.name} at ${money(ESSENTIAL.price)} plus GST, and ${TURNKEY.name} at ${money(TURNKEY.price)} plus GST. The first ${numberWord(FOUNDING.places)} clinics get a founding price of ${money(ESSENTIAL.founding)} or ${money(TURNKEY.founding)}. The optional monthly care plan is ${money(CARE_PLAN.price)} plus GST a month on a 12-month term. Larger practices are quoted after the free check.`],
   ["What's the difference between the two packages?", "Essential puts your Rule 21 policy, records, core security, secure messaging and a short remote training session in place. Turnkey adds live training for all staff, moves your most frequent fax contacts to secure messaging, tests a restore from backup, and includes 30 days of support after go-live."],
   ["Can funding help pay for it?", "Possibly. The PIP Digital Health Incentive asks practices to have secure messaging and a written policy encouraging its use, which both packages cover. Victorian primary health networks also run digital health support and sometimes grants, so it's worth asking yours. We'll give you a written scope and quote for any application, but we can't promise funding."],
   ["How long does it take?", "Usually two to four weeks from the go-ahead, depending on staff availability. Most of the work is done remotely."],
@@ -131,4 +141,3 @@ export const CHECK = [
   ["Do you send and receive referrals and results without fax?", "Move referrals and results to secure messaging."],
 ];
 
-export const money = (n) => "$" + n.toLocaleString("en-AU");
