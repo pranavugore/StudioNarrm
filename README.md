@@ -20,6 +20,10 @@ npm run preview   # serves the built dist/ folder
 | `src/data/site.js` | Name, job title, email, LinkedIn, location, last-updated date |
 | `src/data/flags.js` | On/off switches. `SHOW_GP = false` hides the GP clinics offer everywhere; set it to `true` and rebuild to bring it back |
 | `src/layouts/Base.astro` | Shared `<head>`: title, description, canonical, Open Graph, JSON-LD |
+| `src/data/services.js` | Every service: home panel, page content, slide caption (`tags`), llms.txt line (`blurb`). `hidden: true` hides one everywhere, page included |
+| `src/data/gp.js` | GP clinic offer. Prices live only in `PLANS`; the page, FAQ, guide, JSON-LD and llms.txt read them from there (regenerate the PDF by hand) |
+| `src/pages/[service]/index.astro` | Builds `/automation/`, `/agent-ready/`, `/custom-apps/` (any visible service with page content) from `src/layouts/ServicePage.astro` |
+| `src/lib/schema.js`, `src/lib/format.js` | Shared JSON-LD builders (site, studio, founder, breadcrumbs) and small formatters (dates, prices, step numbers) |
 | `src/components/Header.astro`, `Footer.astro` | Navigation and footer, shared by every page |
 | `src/pages/index.astro` | Home page |
 | `src/pages/data-viz/index.astro` | Dashboard and ten interactive charts (sample data) |
@@ -30,6 +34,14 @@ npm run preview   # serves the built dist/ folder
 | `public/` | Copied as-is: favicons, share image `og.png`, `logo.png`, D3 files, chart code |
 
 The sitemap (`sitemap-index.xml`) is generated automatically on every build.
+
+## How it deploys today
+
+The live site is a Cloudflare **Worker** (studionarrm) connected to this repo with Workers Builds. Every push to `main` runs `npm run build` then `npx wrangler deploy`, which serves `dist/` as static assets on studionarrm.com. There is no `wrangler.jsonc`; Wrangler works the settings out from the Astro project.
+
+Preview builds for other branches are switched off (Settings → Build → Previews → "Builds for Preview branches"). Cloudflare's preview command, `npx wrangler preview`, needs a `wrangler.jsonc` with a `previews` block, which this repo doesn't have. Adding that file would also change how `main` deploys, so do it as its own change if previews are ever wanted.
+
+The steps below are the original first-time setup notes.
 
 ## Deploy to Cloudflare Pages
 

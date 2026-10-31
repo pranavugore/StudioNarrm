@@ -15,8 +15,10 @@ const AGENTS = [
   "MistralAI-User", "DuckAssistBot", "CCBot",
 ];
 
+import { originOf } from "../lib/schema.js";
+
 export function GET({ site }) {
-  const origin = site.href.replace(/\/$/, "");
+  const origin = originOf(site);
   const named = AGENTS.map((a) => `User-agent: ${a}\nAllow: /\n`).join("\n");
   return new Response(`User-agent: *
 Allow: /

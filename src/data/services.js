@@ -1,7 +1,9 @@
 // All services. Each one links to its own page.
 // Keep copy at capability level: no client names, figures or internal details.
-// To hide a service, set `hidden: true` here and rename its page folder in src/pages
-// with a leading underscore (e.g. _video-ads) so Astro skips it. Reverse both to bring it back.
+// To hide a service, set `hidden: true`. Its page (built by src/pages/[service]/index.astro), menu,
+// footer, home panel, llms.txt and JSON-LD entries all drop out. Remove the flag to bring it back.
+// `tags` is the hero slide caption on the home page; `blurb` is its line in llms.txt.
+// Services with a `page` get a page from the shared ServicePage layout; data-viz has its own page.
 import { SHOW_GP } from "./flags.js";
 
 export const ALL_SERVICES = [
@@ -11,6 +13,8 @@ export const ALL_SERVICES = [
     tone: "t-data",
     art: "data",
     eyebrow: "Data analytics & visualisation",
+    tags: "Dashboards · Data stories",
+    blurb: "dashboards, data pipelines and interactive data stories, with live examples",
     kicker: "Drowning in spreadsheets?",
     title: "See your numbers <i>clearly</i>",
     summary: "We pull your data out of forms, CRMs and spreadsheets into one clean model, then build the views people actually use: an everyday dashboard, or something more memorable when the story matters.",
@@ -26,6 +30,8 @@ export const ALL_SERVICES = [
     tone: "t-rpa",
     art: "flow",
     eyebrow: "Automation",
+    tags: "n8n · RPA · AI agents",
+    blurb: "workflow automation (n8n), robotic process automation, system sync and scheduled reporting",
     kicker: "Same task, every day, by hand?",
     title: "Automate the <i>boring</i> bits",
     summary: "Copy and paste between inboxes, spreadsheets and systems is where good people's weeks disappear. We replace it with workflows and robots that run quietly in the background and tell you when something needs a human.",
@@ -61,6 +67,8 @@ export const ALL_SERVICES = [
     tone: "t-flow",
     art: "agents",
     eyebrow: "Prepare your business for agents",
+    tags: "AEO · GEO · MCP",
+    blurb: "AI visibility (AEO/GEO), structured data, llms.txt, APIs and MCP servers for AI agents, internal AI agents",
     kicker: "Will AI assistants recommend you?",
     title: "Get <i>agent-ready</i>",
     summary: "People now ask ChatGPT, Claude, Gemini and Perplexity what to buy and who to call, and AI agents are starting to book and order on their behalf. We make your business easy for them to find, understand and act on.",
@@ -87,6 +95,8 @@ export const ALL_SERVICES = [
     tone: "t-apps",
     art: "apps",
     eyebrow: "Custom apps and websites",
+    tags: "Websites · Web apps · Mobile",
+    blurb: "custom websites, AppSheet and low-code apps, web and mobile apps, portals and product MVPs",
     kicker: "Off-the-shelf doesn't quite fit?",
     title: "Apps and websites built for <i>your</i> way of working",
     summary: "From a quick AppSheet app for the team in the field to a fast, custom website or a full web platform, we design and build software around how your people actually work, and ship it quickly with AI-assisted development.",
@@ -120,6 +130,8 @@ export const ALL_SERVICES = [
     tone: "t-time",
     art: "video",
     eyebrow: "Video ads",
+    tags: "Script · Edit · Every format",
+    blurb: "short-form video ads, script to edit, cut for every platform",
     kicker: "Need to be seen, not scrolled past?",
     title: "Short videos that <i>stop</i> the scroll",
     summary: "Short-form video ads for social and the web: script, storyboard, edit and captions, cut for every format. AI-assisted production keeps it fast and affordable, so you can test several versions instead of betting on one.",
@@ -147,6 +159,8 @@ export const ALL_SERVICES = [
     tone: "t-yoga",
     art: "marketing",
     eyebrow: "Marketing & outreach",
+    tags: "Research · Outreach · Follow-up",
+    blurb: "AI-assisted prospect research, personalised email outreach, follow-ups and reporting",
     kicker: "Great offer, too few people know?",
     title: "Reach the <i>right</i> people",
     summary: "Finding the right partners and customers, writing to them personally, and following up on time is hard to do by hand. We build outreach systems that research, draft and schedule, with you approving what goes out.",

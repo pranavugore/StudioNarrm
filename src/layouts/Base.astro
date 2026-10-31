@@ -2,36 +2,18 @@
 import "../styles/global.css";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
-import { SITE, org } from "../data/site.js";
+import { SITE } from "../data/site.js";
+import { originOf, website, org, person } from "../lib/schema.js";
 
 const { title, description, ogType = "website", jsonld = [], current = "", includeBase = true, updated = SITE.updated } = Astro.props;
-const origin = Astro.site.href.replace(/\/$/, "");
+const origin = originOf(Astro.site);
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
 const ogImage = origin + "/og.png";
 // Every built page except 404 also gets a Markdown copy at <page>/index.md (see integrations/agent-files.mjs).
 const markdownHref = Astro.url.pathname.startsWith("/404") ? null : canonical + "index.md";
 
-const base = {
-  "@context": "https://schema.org",
-  "@graph": [
-    { "@type": "WebSite", "@id": origin + "/#website", url: origin + "/", name: SITE.brand, publisher: { "@id": origin + "/#org" }, inLanguage: "en-AU" },
-    org(origin),
-    {
-      "@type": "Person",
-      "@id": origin + "/#person",
-      name: SITE.name,
-      givenName: SITE.givenName,
-      familyName: SITE.familyName,
-      jobTitle: SITE.jobTitle,
-      description: SITE.description,
-      url: origin + "/",
-      email: "mailto:" + SITE.email,
-      address: { "@type": "PostalAddress", addressLocality: SITE.city, addressRegion: SITE.region, addressCountry: SITE.country },
-      sameAs: [SITE.linkedin],
-      worksFor: { "@id": origin + "/#org" },
-    },
-  ],
-};
+// Site, studio and founder nodes. The home page builds its own richer graph and sets includeBase={false}.
+const base = { "@context": "https://schema.org", "@graph": [website(origin), org(origin), person(origin)] };
 
 // Stamp dateModified on the page's own node (WebPage, ProfilePage, AboutPage...), or add a
 // WebPage node when the page doesn't have one, so answer engines can see how fresh it is.

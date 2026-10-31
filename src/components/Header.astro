@@ -1,9 +1,9 @@
 ---
 import { SITE } from "../data/site.js";
 import Logo from "./Logo.astro";
-const { current = "" } = Astro.props;
 import { SERVICES } from "../data/services.js";
 import { SHOW_GP } from "../data/flags.js";
+const { current = "" } = Astro.props;
 const isService = SERVICES.some((x) => x.slug === current);
 const links = [
   { href: "/#services", label: "Services", key: isService ? current : "home" },

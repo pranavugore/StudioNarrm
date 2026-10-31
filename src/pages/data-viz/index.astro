@@ -1,46 +1,23 @@
 ---
 import Base from "../../layouts/Base.astro";
-const origin = Astro.site.href.replace(/\/$/, "");
-const title = "Data Visualisation | Studio Narrm, Melbourne";
-const description = "Interactive data visualisation examples from Studio Narrm: a classic analytics dashboard plus creative charts, from radial timelines and beeswarms to sankeys, hex maps and chord diagrams.";
-const jsonld = [{
-  "@context": "https://schema.org",
-  "@type": "WebPage",
-  "name": "Data visualisation",
-  "url": `${origin}/data-viz/`,
-  "description": "Interactive data visualisation examples from Studio Narrm: a classic analytics dashboard plus creative charts, from radial timelines and beeswarms to sankeys, hex maps and chord diagrams.",
-  "author": {
-    "@id": `${origin}/#person`
-  },
-  "about": [
-    "Data visualisation",
-    "Dashboards",
-    "D3.js",
-    "Analytics"
-  ],
-  "breadcrumb": {
-    "@type": "BreadcrumbList",
-    "itemListElement": [
-      {
-        "@type": "ListItem",
-        "position": 1,
-        "name": "Home",
-        "item": `${origin}/`
-      },
-      {
-        "@type": "ListItem",
-        "position": 2,
-        "name": "Data visualisation",
-        "item": `${origin}/data-viz/`
-      }
-    ]
-  }
-}];
 import "../../styles/data-viz.css";
 import { VIZ } from "../../data/viz.js";
-const two = (k) => String(k + 1).padStart(2, "0");
+import { originOf, breadcrumbs, ld } from "../../lib/schema.js";
+import { two } from "../../lib/format.js";
+const origin = originOf(Astro.site);
+const title = "Data Visualisation | Studio Narrm, Melbourne";
+const description = "Interactive data visualisation examples from Studio Narrm: a classic analytics dashboard plus creative charts, from radial timelines and beeswarms to sankeys, hex maps and chord diagrams.";
+const jsonld = [ld({
+  "@type": "WebPage",
+  name: "Data visualisation",
+  url: `${origin}/data-viz/`,
+  description,
+  author: { "@id": `${origin}/#person` },
+  about: ["Data visualisation", "Dashboards", "D3.js", "Analytics"],
+  breadcrumb: breadcrumbs(origin, [["Home", "/"], ["Data visualisation", "/data-viz/"]]),
+})];
 ---
-<Base title={title} description={description} jsonld={jsonld} current="data-viz" includeBase={true}>
+<Base title={title} description={description} jsonld={jsonld} current="data-viz">
 <main class="dv">
   <div class="dv-hero">
     <div class="wrap">

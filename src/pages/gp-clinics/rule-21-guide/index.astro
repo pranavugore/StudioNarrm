@@ -1,15 +1,15 @@
 ---
 import Base from "../../../layouts/Base.astro";
-import { SITE } from "../../../data/site.js";
-import { GP, SOURCES, RULE21, CHECK } from "../../../data/gp.js";
-const origin = Astro.site.href.replace(/\/$/, "");
+import { GP, SOURCES, RULE21, CHECK, FROM_PRICE } from "../../../data/gp.js";
+import { originOf, breadcrumbs, ld } from "../../../lib/schema.js";
+import { longDate } from "../../../lib/format.js";
+const origin = originOf(Astro.site);
 const url = origin + GP.guideHref;
 const title = "Rule 21 explained for small GP practices | Studio Narrm";
 const description = "A plain-English guide to Rule 21 of the My Health Records Rules 2026: what the Security and Access Policy must cover, who it applies to, and what a small practice can do this month.";
-const reviewed = new Date(GP.reviewed + "T00:00:00").toLocaleDateString("en-AU", { day: "numeric", month: "long", year: "numeric" });
+const reviewed = longDate(GP.reviewed);
 const jsonld = [
-  {
-    "@context": "https://schema.org",
+  ld({
     "@type": "Article",
     headline: "Rule 21 explained for small GP practices",
     description,
@@ -19,16 +19,8 @@ const jsonld = [
     publisher: { "@id": origin + "/#org" },
     about: ["My Health Record", "Rule 21", "Security and Access Policy", "General practice"],
     citation: SOURCES.map(([name, u]) => ({ "@type": "CreativeWork", name, url: u })),
-  },
-  {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: origin + "/" },
-      { "@type": "ListItem", position: 2, name: "GP clinics", item: origin + GP.href },
-      { "@type": "ListItem", position: 3, name: "Rule 21 guide", item: url },
-    ],
-  },
+  }),
+  ld(breadcrumbs(origin, [["Home", "/"], ["GP clinics", GP.href], ["Rule 21 guide", GP.guideHref]])),
 ];
 ---
 <Base title={title} description={description} jsonld={jsonld} current="gp-clinics" ogType="article">
@@ -66,7 +58,7 @@ const jsonld = [
 
         <aside class="guide-cta">
           <h2>Want it done for you?</h2>
-          <p>We tailor your policy, set up access and records, fix the security basics and replace fax with secure messaging, for a fixed fee from $3,800 + GST.</p>
+          <p>We tailor your policy, set up access and records, fix the security basics and replace fax with secure messaging, for a fixed fee from {FROM_PRICE} + GST.</p>
           <a class="btn tone" href={GP.href}>See the GP clinic packages</a>
         </aside>
       </div>
