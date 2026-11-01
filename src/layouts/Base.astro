@@ -9,8 +9,10 @@ const { title, description, ogType = "website", jsonld = [], current = "", inclu
 const origin = originOf(Astro.site);
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
 const ogImage = origin + "/og.png";
+// The 404 page is served at any missing URL, so it gets noindex and no canonical, Markdown copy or WebPage node.
+const notFound = Astro.url.pathname.startsWith("/404");
 // Every built page except 404 also gets a Markdown copy at <page>/index.md (see integrations/agent-files.mjs).
-const markdownHref = Astro.url.pathname.startsWith("/404") ? null : canonical + "index.md";
+const markdownHref = notFound ? null : canonical + "index.md";
 
 // Site, studio and founder nodes. The home page builds its own richer graph and sets includeBase={false}.
 const base = { "@context": "https://schema.org", "@graph": [website(origin), org(origin), person(origin)] };
@@ -21,7 +23,7 @@ const PAGE_TYPES = ["WebPage", "ProfilePage", "AboutPage", "CollectionPage", "FA
 const nodes = [...jsonld, ...(includeBase ? [base] : [])].flatMap((o) => o["@graph"] || [o]);
 const pageNode = nodes.find((n) => PAGE_TYPES.includes(n["@type"]) && n["@type"] !== "FAQPage");
 if (pageNode) pageNode.dateModified = updated;
-else if (includeBase) base["@graph"].push({ "@type": "WebPage", "@id": canonical + "#webpage", url: canonical, name: title, description, isPartOf: { "@id": origin + "/#website" }, about: { "@id": origin + "/#org" }, inLanguage: "en-AU", dateModified: updated });
+else if (includeBase && !notFound) base["@graph"].push({ "@type": "WebPage", "@id": canonical + "#webpage", url: canonical, name: title, description, isPartOf: { "@id": origin + "/#website" }, about: { "@id": origin + "/#org" }, inLanguage: "en-AU", dateModified: updated });
 ---
 <!doctype html>
 <html lang="en-AU">
@@ -31,7 +33,7 @@ else if (includeBase) base["@graph"].push({ "@type": "WebPage", "@id": canonical
     <title>{title}</title>
     <meta name="description" content={description} />
     <meta name="author" content={SITE.name} />
-    <link rel="canonical" href={canonical} />
+    {notFound ? <meta name="robots" content="noindex" /> : <link rel="canonical" href={canonical} />}
     <link rel="icon" href="/favicon.ico" sizes="32x32" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />

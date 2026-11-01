@@ -6,7 +6,7 @@ import { originOf } from "../lib/schema.js";
 import { money, numberWord } from "../lib/format.js";
 
 const [ESSENTIAL, TURNKEY] = PACKAGES;
-const gpPrices = `Two fixed-fee packages for practices with 1 to 5 GPs: ${ESSENTIAL.name} ${money(ESSENTIAL.price)} + GST, ${TURNKEY.name} ${money(TURNKEY.price)} + GST (founding price for the first ${numberWord(FOUNDING.places)} clinics ${money(ESSENTIAL.founding)} / ${money(TURNKEY.founding)}), optional ${CARE_PLAN.name.toLowerCase()} ${money(CARE_PLAN.price)} + GST.`;
+const gpPrices = `Two fixed-fee packages for practices with 1 to 5 GPs: ${ESSENTIAL.name} ${money(ESSENTIAL.price)} + GST, ${TURNKEY.name} ${money(TURNKEY.price)} + GST (founding price for the first ${numberWord(FOUNDING.places)} clinics ${money(ESSENTIAL.founding)} / ${money(TURNKEY.founding)} + GST), optional ${CARE_PLAN.name.toLowerCase()} ${money(CARE_PLAN.price)} + GST.`;
 
 // Each link points at the page's Markdown copy (built by integrations/agent-files.mjs); the HTML page is the same URL without index.md.
 export function GET({ site }) {
