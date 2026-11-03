@@ -3,12 +3,16 @@ import { SITE } from "../data/site.js";
 import Logo from "./Logo.astro";
 import { SERVICES } from "../data/services.js";
 import { SHOW_GP } from "../data/flags.js";
+import { getArticles, ARTICLES_HREF } from "../lib/articles.js";
 const { current = "" } = Astro.props;
+// The Articles link shows once at least one article is published.
+const hasArticles = (await getArticles()).length > 0;
 const isService = SERVICES.some((x) => x.slug === current);
 const links = [
   { href: "/#services", label: "Services", key: isService ? current : "home" },
   ...(SHOW_GP ? [{ href: "/gp-clinics/", label: "GP clinics", key: "gp-clinics" }] : []),
   { href: "/work/", label: "Case studies", key: "work" },
+  ...(hasArticles ? [{ href: ARTICLES_HREF, label: "Articles", key: "articles" }] : []),
   { href: "/about/", label: "About", key: "about" },
 ];
 ---

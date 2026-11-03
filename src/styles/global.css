@@ -453,3 +453,25 @@ form.quiz { background: none; border: 0; padding: 0; display: block; }
 .gp-fields { display: none; gap: 0.8rem; grid-template-columns: 1.4fr 1fr 1fr; }
 #contact-form:has(#f-gp:checked) .gp-fields { display: grid; }
 @media (max-width: 38rem) { .gp-fields { grid-template-columns: 1fr; } }
+
+/* Articles */
+.t-articles { --tone: var(--accent-text); }
+.article-list { list-style: none; padding: 0; margin: 0; max-width: 46rem; }
+.article-list li { padding-block: 1.6rem; border-top: 1px solid var(--line); }
+.article-list li:last-child { border-bottom: 1px solid var(--line); }
+.wrap-main .article-list h2 { font-size: 1.5rem; margin: 0.4rem 0 0.5rem; }
+.article-list h2 a { color: var(--text); text-decoration: none; }
+.article-list h2 a:hover { color: var(--tone); }
+.article-list p { color: var(--muted); margin: 0; }
+.article-meta { color: var(--tone); font-size: 0.78rem; }
+.article-empty { color: var(--muted); }
+.prose { margin-top: 2rem; }
+.prose p, .prose ul, .prose ol, .prose blockquote, .prose pre, .prose img { margin-block: 0 1.1rem; }
+.prose ul, .prose ol { padding-left: 1.2rem; display: grid; gap: 0.4rem; }
+.prose h3 { margin: 1.8rem 0 0.6rem; font-size: 1.25rem; }
+.prose blockquote { border-left: 3px solid var(--tone); padding-left: 1rem; color: var(--muted); margin-inline: 0; }
+.prose code { font-family: var(--f-mono); font-size: 0.9em; }
+.prose pre { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 1rem; overflow-x: auto; }
+.prose img { max-width: 100%; height: auto; border-radius: var(--r); }
+.article-tags { margin-top: 2rem; }
+.t-articles .guide h1 { font-size: clamp(2.2rem, 5.5vw, 3.6rem); line-height: 1.05; }

@@ -28,6 +28,8 @@ npm run preview   # serves the built dist/ folder
 | `src/pages/index.astro` | Home page |
 | `src/pages/data-viz/index.astro` | Dashboard and ten interactive charts (sample data) |
 | `src/pages/work/index.astro`, `about/index.astro` | Case studies, career |
+| `src/content/articles/*.md` | Articles, one Markdown file each (see `_TEMPLATE.md.example` for the fields). The file name is the URL: `my-post.md` → `/articles/my-post/`. `draft: true` keeps one off the live site. The Articles menu link, sitemap entry and llms.txt list appear once at least one article is published |
+| `src/pages/articles/` | Articles list (`/articles/`) and the article page template; schema lives in `src/content.config.ts` |
 | `src/pages/robots.txt.js`, `llms.txt.js` | Generated with your real domain at build time |
 | `src/styles/` | `global.css` (site) and `data-viz.css` (charts page) |
 | `src/components/Logo.astro` | Logo (SN mark + wordmark) as inline SVG; follows light/dark |

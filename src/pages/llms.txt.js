@@ -4,14 +4,17 @@ import { SHOW_GP } from "../data/flags.js";
 import { GP, PACKAGES, CARE_PLAN, FOUNDING } from "../data/gp.js";
 import { originOf } from "../lib/schema.js";
 import { money, numberWord } from "../lib/format.js";
+import { getArticles, articleHref, isoDate, ARTICLES_HREF } from "../lib/articles.js";
 
 const [ESSENTIAL, TURNKEY] = PACKAGES;
 const gpPrices = `Two fixed-fee packages for practices with 1 to 5 GPs: ${ESSENTIAL.name} ${money(ESSENTIAL.price)} + GST, ${TURNKEY.name} ${money(TURNKEY.price)} + GST (founding price for the first ${numberWord(FOUNDING.places)} clinics ${money(ESSENTIAL.founding)} / ${money(TURNKEY.founding)}), optional ${CARE_PLAN.name.toLowerCase()} ${money(CARE_PLAN.price)} + GST.`;
 
 // Each link points at the page's Markdown copy (built by integrations/agent-files.mjs); the HTML page is the same URL without index.md.
-export function GET({ site }) {
+export async function GET({ site }) {
   const origin = originOf(site);
+  const articles = await getArticles();
   const md = (path) => `${origin}${path}index.md`;
+  const articleLines = articles.map((a) => `- [${a.data.title}](${md(articleHref(a))}) (${isoDate(a.data.date)}): ${a.data.description}\n`).join("");
   const services = SERVICES.map((sv) => `- [${sv.eyebrow}](${md(sv.href)}): ${sv.blurb}\n`).join("");
   return new Response(`# ${SITE.brand}
 
@@ -46,7 +49,10 @@ ${services}
 ${SHOW_GP ? `- [GP clinics](${md(GP.href)}): Rule 21 and fax-free packages for GP clinics, prices, funding, Rule 21 self-check, FAQ
 - [Rule 21 guide](${md(GP.guideHref)}): plain-English guide to the My Health Record Security and Access Policy for small practices, with official sources
 ` : ""}- [About](${md("/about/")}): career timeline, certifications, education
+${articles.length ? `- [Articles](${md(ARTICLES_HREF)}): practical articles on data, automation and AI agents
 
+## Articles
+${articleLines}` : ""}
 ## Optional
 - [Full site text](${origin}/llms-full.txt): every page above as Markdown in one file
 - [Sitemap](${origin}/sitemap-index.xml)
