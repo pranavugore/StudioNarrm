@@ -83,6 +83,8 @@ export default function agentFiles({ order = [] } = {}) {
           const path = "/" + relative(root, file).replace(/index\.html$/, "").replace(/\\/g, "/");
           if (path.startsWith("/404")) continue;
           const html = await readFile(file, "utf8");
+          // Pages marked noindex (e.g. an empty articles list) get no Markdown copy.
+          if (/<meta name="robots" content="noindex/.test(html)) continue;
           const title = unescape(pick(html, /<title>([^<]*)<\/title>/));
           const description = unescape(pick(html, /<meta name="description" content="([^"]*)"/));
           const url = site + path;

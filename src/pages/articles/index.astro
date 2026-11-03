@@ -1,0 +1,56 @@
+---
+import Base from "../../layouts/Base.astro";
+import { originOf, breadcrumbs, ld } from "../../lib/schema.js";
+import { getArticles, articleHref, isoDate, ARTICLES_HREF } from "../../lib/articles.js";
+import { longDate } from "../../lib/format.js";
+const origin = originOf(Astro.site);
+const articles = await getArticles();
+const title = "Articles on data, automation and AI agents | Studio Narrm";
+const description = "Articles from Studio Narrm, a Melbourne studio: practical notes on data dashboards, workflow automation, AI agents, custom apps and getting a business ready for AI search.";
+const url = origin + ARTICLES_HREF;
+const jsonld = [ld({
+  "@type": "CollectionPage",
+  "@id": url + "#webpage",
+  name: "Studio Narrm articles",
+  description,
+  url,
+  isPartOf: { "@id": origin + "/#website" },
+  publisher: { "@id": origin + "/#org" },
+  inLanguage: "en-AU",
+  breadcrumb: breadcrumbs(origin, [["Home", "/"], ["Articles", ARTICLES_HREF]]),
+  mainEntity: {
+    "@type": "ItemList",
+    itemListElement: articles.map((a, i) => ({ "@type": "ListItem", position: i + 1, url: origin + articleHref(a), name: a.data.title })),
+  },
+})];
+---
+<Base title={title} description={description} jsonld={jsonld} current="articles">
+  {articles.length === 0 && <meta slot="head" name="robots" content="noindex" />}
+  <main class="wrap-main t-articles">
+    <section class="page-hero">
+      <div class="wrap">
+        <span class="eyebrow">Articles</span>
+        <h1>Articles</h1>
+        <p class="lead">Practical notes from Studio Narrm on data dashboards, workflow automation, AI agents and custom apps, written for small businesses, clinics and teams.</p>
+      </div>
+    </section>
+
+    <section aria-label="All articles">
+      <div class="wrap">
+        {articles.length === 0
+          ? <p class="article-empty">Our first articles are on the way.</p>
+          : <ol class="article-list">
+              {articles.map((a) => (
+                <li>
+                  <article>
+                    <p class="mono article-meta"><time datetime={isoDate(a.data.date)}>{longDate(isoDate(a.data.date))}</time>{a.data.draft && " · Draft"}</p>
+                    <h2><a href={articleHref(a)}>{a.data.title}</a></h2>
+                    <p>{a.data.description}</p>
+                  </article>
+                </li>
+              ))}
+            </ol>}
+      </div>
+    </section>
+  </main>
+</Base>

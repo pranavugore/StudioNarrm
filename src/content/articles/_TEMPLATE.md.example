@@ -1,0 +1,15 @@
+---
+# Copy this file to src/content/articles/<url-slug>.md and fill it in.
+title: "Article title"
+description: "One or two sentences that sum up the article. Used in search results, the list page and llms.txt."
+date: 2026-11-03
+# updated: 2026-11-10
+tags: ["Automation"]
+draft: false
+---
+
+Opening paragraph that answers the main question directly.
+
+## First section
+
+Body text in Markdown. Use ## and ### headings, lists, links and images (put images in public/articles/).
