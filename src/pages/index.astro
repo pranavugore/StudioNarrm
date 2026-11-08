@@ -2,6 +2,7 @@
 import Base from "../layouts/Base.astro";
 import ServicePanel from "../components/ServicePanel.astro";
 import ServiceArt from "../components/ServiceArt.astro";
+import Shot from "../components/Shot.astro";
 import { SERVICES, isShown } from "../data/services.js";
 import { SITE, FOUNDER_PROFILE } from "../data/site.js";
 import { originOf, website, org, person, ld } from "../lib/schema.js";
@@ -12,7 +13,7 @@ const origin = originOf(Astro.site);
 const NUM = capitalise(numberWord(SERVICES.length));
 const title = "Studio Narrm | Data, Automation & AI Agents, Melbourne";
 const description = "Studio Narrm is a Melbourne studio for data dashboards, n8n workflow automation, AI agents, custom apps and websites, founded by Pranav Gore, a solution architect with 19 years in banking, telecom and non-profits.";
-// The home page carries the full graph (with the founder's credentials and skills) instead of Base's,
+// The home page carries the full graph (with the founder’s credentials and skills) instead of Base’s,
 // so it sets includeBase={false}. Base stamps dateModified on the ProfilePage node.
 const jsonld = [
   ld({
@@ -37,15 +38,6 @@ const SLIDES = [
   ...SERVICES.map((sv) => ({ ...sv, link: "#" + sv.slug })),
   ...(SHOW_GP ? [{ slug: "gp-clinics", tone: "t-health", art: "clinic", eyebrow: "GP clinics: Rule 21 and fax-free", tags: "Rule 21 · Security · Secure messaging", link: "/gp-clinics/" }] : []),
 ];
-// Icons for the "Jump to a service" row, by service slug.
-const ICONS = {
-  "data-viz": '<rect x="7" y="20" width="7" height="20" rx="2" class="s-tone"/><rect x="18" y="12" width="7" height="28" rx="2" class="s-tone"/><rect x="29" y="26" width="7" height="14" rx="2" class="s-tone"/><rect x="40" y="16" width="7" height="24" rx="2" class="s-tone"/>',
-  automation: '<rect x="12" y="18" width="28" height="22" rx="6" class="s-tone"/><circle cx="20" cy="29" r="3" fill="var(--bg)"/><circle cx="32" cy="29" r="3" fill="var(--bg)"/><rect x="24" y="12" width="4" height="6" class="s-tone"/>',
-  "agent-ready": '<circle cx="8" cy="26" r="6" class="s-tone"/><circle cx="26" cy="16" r="6" class="s-tone"/><circle cx="44" cy="26" r="6" class="s-tone"/><circle cx="26" cy="38" r="6" class="s-tone"/><path d="M8 26 L26 16 L44 26 L26 38 Z" class="s-stroke-tone" stroke-width="2" fill="none"/>',
-  "custom-apps": '<rect x="14" y="7" width="24" height="38" rx="5" class="s-tone"/><rect x="18" y="13" width="16" height="3" rx="1.5" fill="var(--bg)"/><rect x="18" y="20" width="16" height="3" rx="1.5" fill="var(--bg)"/><rect x="18" y="27" width="10" height="3" rx="1.5" fill="var(--bg)"/>',
-  "video-ads": '<rect x="8" y="12" width="36" height="28" rx="6" class="s-tone"/><path d="M22 19 L32 26 L22 33 Z" fill="var(--bg)"/>',
-  "marketing-outreach": '<path d="M10 22 H18 L36 12 V40 L18 30 H10 Z" class="s-tone"/><path d="M40 20 Q45 26 40 32" class="s-stroke-tone" stroke-width="3" fill="none" stroke-linecap="round"/>',
-};
 const MARQUEE = ["Banking", "Telecommunications", "Telstra", "Retail", "Non-profit", "n8n", "AWS", "Claude", "Google AppSheet", "PostgreSQL", "Kafka", "Spring Boot", "Oracle OSM", "Looker Studio", "Docker"];
 ---
 <Base title={title} description={description} jsonld={jsonld} current="home" includeBase={false}>
@@ -54,10 +46,8 @@ const MARQUEE = ["Banking", "Telecommunications", "Telstra", "Retail", "Non-prof
       <canvas class="net" data-particle-network aria-hidden="true"></canvas>
       <div class="wrap">
         <div>
-          <span class="eyebrow">Systems, Data &amp; Automation</span>
-          <p class="kicker">Calmly fixing chaos since 2007…</p>
           <h1 id="hero-h"><span class="line">Messy process in.</span> <span class="line"><span class="hl">Working system</span> out.</span></h1>
-          <p class="lead">Studio Narrm is a Melbourne studio that designs <strong>and</strong> builds: <strong>n8n automations and AI agents</strong>, <strong>dashboards</strong>, <strong>apps</strong>, and <strong>custom websites</strong>.</p>
+          <p class="lead">Studio Narrm designs and builds automations, AI agents, dashboards, apps and websites in Melbourne.</p>
           <div class="cta">
             <a class="btn" href="#contact">Tell us about your problem</a>
             <a class="btn ghost" href="#services">See the work</a>
@@ -67,8 +57,8 @@ const MARQUEE = ["Banking", "Telecommunications", "Telstra", "Retail", "Non-prof
           <div class="slides">
           {SLIDES.map((sv, i) => (
             <figure class={`slide ${sv.tone}${i === 0 ? " on" : ""}`} aria-hidden={i === 0 ? "false" : "true"} inert={i !== 0}>
-              <ServiceArt name={sv.art} bare />
-              <figcaption><b><a href={sv.link}>{sv.eyebrow}</a></b><span class="mono">{sv.tags}</span></figcaption>
+              {sv.shot ? <Shot shot={sv.shot} cls="slide-shot" eager={i === 0} /> : <ServiceArt name={sv.art} bare />}
+              <figcaption><b><a href={sv.link}>{sv.eyebrow}</a></b><ul class="tags">{sv.tags.split(" · ").map((t) => <li>{t}</li>)}</ul></figcaption>
             </figure>
           ))}
           </div>
@@ -83,21 +73,20 @@ const MARQUEE = ["Banking", "Telecommunications", "Telstra", "Retail", "Non-prof
     {SHOW_GP && <aside class="gp-banner" aria-label="For GP clinics">
       <div class="wrap">
         <p>Running a GP clinic in regional Victoria? <span>Get your Rule 21 Security and Access Policy in place and go fax-free, for a fixed fee.</span></p>
-        <a href="/gp-clinics/">See the GP clinic package →</a>
+        <a href="/gp-clinics/">See the GP clinic package</a>
       </div>
     </aside>}
 
-    <section class="intro" aria-labelledby="intro-h">
+    <section class="intro" id="services" aria-labelledby="intro-h">
       <div class="wrap">
         <div>
-          <span class="eyebrow">Welcome</span>
           <h2 id="intro-h">Architecture first. Then we build the thing.</h2>
         </div>
         <div>
           <p>Pranav has spent <strong>19 years</strong> designing systems that big organisations depend on: <strong>core banking integration</strong>, <strong>telecom order fulfilment</strong>, and a fleet of <strong>100+ automation robots</strong> at Telstra.</p>
           <p>At Studio Narrm we build the whole thing, fast, with <strong>AI-assisted development</strong>. Data pipelines, AI agents, dashboards, mobile apps and full platforms. Different problems, same habit: understand it properly, keep it simple, ship it.</p>
-          <ul class="thumbs" aria-label="Jump to a service" style={`--cols:${SERVICES.length};--cols-sm:${SERVICES.length > 4 ? 3 : SERVICES.length}`}>
-            {SERVICES.map((sv) => <li><a class={sv.tone} href={"#" + sv.slug} title={sv.eyebrow}><svg viewBox="0 0 52 52" aria-hidden="true" focusable="false" set:html={ICONS[sv.slug]} /><span class="sr">{sv.eyebrow}</span></a></li>)}
+          <ul class="services-nav" aria-label="Jump to a service">
+            {SERVICES.map((sv) => <li><a class={sv.tone} href={"#" + sv.slug}>{sv.eyebrow}</a></li>)}
           </ul>
         </div>
       </div>
@@ -105,8 +94,7 @@ const MARQUEE = ["Banking", "Telecommunications", "Telstra", "Retail", "Non-prof
 
     {SHOW_WHO && <section class="who" id="who" aria-labelledby="who-h">
       <div class="wrap">
-        <span class="eyebrow">Who are you?</span>
-        <h2 id="who-h">See yourself <em>as…</em></h2>
+        <h2 id="who-h">See yourself as…</h2>
         <ul>
           <li><a class="t-data" href="/about/">A hiring manager</a></li>
           <li><a class="t-rpa" href="#automation">A bank or telco team</a></li>
@@ -118,22 +106,11 @@ const MARQUEE = ["Banking", "Telecommunications", "Telstra", "Retail", "Non-prof
       </div>
     </section>}
 
-    <section class="services-head" id="services" aria-labelledby="services-h">
-      <div class="wrap">
-        <span class="eyebrow">What we do</span>
-        <h2 id="services-h">{NUM} ways we can help, one way of working</h2>
-        <p>{isShown("video-ads") ? "Data, automation, AI agents, apps, websites, video and outreach." : "Data, automation, AI agents, apps and websites."} Different tools, same habit: understand the problem properly, build the simplest thing that works, and make sure it keeps working.</p>
-        <ul class="services-nav">
-          {SERVICES.map((sv) => <li><a class={sv.tone} href={"#" + sv.slug}>{sv.eyebrow}</a></li>)}
-        </ul>
-      </div>
-    </section>
 
     {SERVICES.map((sv, i) => <ServicePanel s={sv} i={i} />)}
 
     <section class="served" aria-labelledby="served-h">
       <div class="wrap">
-        <span class="eyebrow">Happily served</span>
         <h2 id="served-h">Industries, teams &amp; tools</h2>
       </div>
       <div class="marquee">
@@ -142,11 +119,10 @@ const MARQUEE = ["Banking", "Telecommunications", "Telstra", "Retail", "Non-prof
       </div>
     </section>
 
-    <section class="section" style="padding-top:0" aria-labelledby="how-h">
+    <section class="section" aria-labelledby="how-h">
       <div class="wrap">
         <div class="section-head">
           <div>
-            <span class="eyebrow">How we work</span>
             <h2 id="how-h">The brief, the mess, the deadline. Bring it.</h2>
           </div>
         </div>
@@ -155,7 +131,7 @@ const MARQUEE = ["Banking", "Telecommunications", "Telstra", "Retail", "Non-prof
           <li class="reveal"><span class="n">02</span><h3>Design</h3><p>Architecture and data model, and the simplest path that works.</p></li>
           <li class="reveal"><span class="n">03</span><h3>Build</h3><p>Apps, integrations and agents, using AI to move fast.</p></li>
           <li class="reveal"><span class="n">04</span><h3>Automate</h3><p>Take people out of the copy-paste.</p></li>
-          <li class="reveal"><span class="n">05</span><h3>Measure</h3><p>Dashboards that show whether it's working.</p></li>
+          <li class="reveal"><span class="n">05</span><h3>Measure</h3><p>Dashboards that show whether it’s working.</p></li>
         </ol>
       </div>
     </section>
@@ -163,7 +139,6 @@ const MARQUEE = ["Banking", "Telecommunications", "Telstra", "Retail", "Non-prof
     <section class="section faq" id="faq" aria-labelledby="faq-h">
       <div class="wrap">
         <div>
-          <span class="eyebrow">Questions</span>
           <h2 id="faq-h">The quick answers</h2>
         </div>
         <div>
@@ -176,7 +151,7 @@ const MARQUEE = ["Banking", "Telecommunications", "Telstra", "Retail", "Non-prof
       <div class="wrap">
         <div>
           <h2 id="contact-h">Ready to fix something? Tell us about it.</h2>
-          <p>A project, or a process that's driving your team mad. We're in Melbourne and happy to work remotely.</p>
+          <p>A project, or a process that’s driving your team mad. We’re in Melbourne and happy to work remotely.</p>
         </div>
         <form id="contact-form" data-email={SITE.email} novalidate>
           <label for="f-name">Your name<input id="f-name" name="name" autocomplete="name" required></label>

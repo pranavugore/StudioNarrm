@@ -27,8 +27,10 @@ const jsonld = [
   ld(breadcrumbs(origin, [["Home", "/"], [s.eyebrow, s.href]])),
 ];
 const others = SERVICES.filter((x) => x.slug !== slug);
+// Hero carries the lead’s first sentence; the rest opens the "What we can do" section.
+const [leadFirst, ...leadRest] = s.page.lead.split(/(?<=\.) /);
 const steps = [
-  ["Understand", "A short call to learn what you need, who it's for and what good looks like."],
+  ["Understand", "A short call to learn what you need, who it’s for and what good looks like."],
   ["Plan", "A simple written plan with scope, timeline and a fixed price where possible."],
   ["Build", "Working pieces early and often, so you can react before anything is final."],
   ["Hand over", "Documentation, a walkthrough and support while it beds in."],
@@ -40,10 +42,8 @@ const steps = [
       <div class="wrap">
         <div class="text">
           <nav class="crumbs mono" aria-label="Breadcrumb"><a href="/">Home</a> / <a href="/#services">Services</a> / <span>{s.eyebrow}</span></nav>
-          <p class="kicker">{s.kicker}</p>
-          <span class="eyebrow">{s.eyebrow}</span>
           <h1 class="caps" set:html={s.title} />
-          <p class="lead">{s.page.lead}</p>
+          <p class="lead">{leadFirst}</p>
           <div class="cta"><a class="btn tone" href="/#contact">Start a conversation</a><a class="btn ghost" href="#what">What we can do</a></div>
         </div>
         <ServiceArt name={s.art} />
@@ -52,7 +52,7 @@ const steps = [
 
     <section class="section" id="what" aria-labelledby="what-h">
       <div class="wrap">
-        <div class="section-head"><div><span class="eyebrow">What we can do</span><h2 id="what-h">{plain(s.title)}, end to end</h2></div></div>
+        <div class="section-head"><div><h2 id="what-h">{plain(s.title)}, end to end</h2></div>{leadRest.length > 0 && <p>{leadRest.join(" ")}</p>}</div>
         <ul class="offer">
           {s.page.offer.map(([n, d], k) => <li class="reveal"><span class="n mono">{two(k)}</span><h3>{n}</h3><p>{d}</p></li>)}
         </ul>
@@ -62,9 +62,9 @@ const steps = [
     {s.page.examples && (
       <section class="section examples" aria-labelledby="ex-h">
         <div class="wrap">
-          <div class="section-head"><div><span class="eyebrow">Examples</span><h2 id="ex-h">From our own work</h2></div></div>
+          <div class="section-head"><div><h2 id="ex-h">From our own work</h2></div></div>
           <ul class="ex">
-            {s.page.examples.map(([t, tag, d]) => <li class="reveal"><span class="mono tag">{tag}</span><h3>{t}</h3><p>{d}</p></li>)}
+            {s.page.examples.map(([t, tag, d]) => <li class="reveal"><span class="tag">{tag.replace(/ · /g, ", ")}</span><h3>{t}</h3><p>{d}</p></li>)}
           </ul>
         </div>
       </section>
@@ -81,7 +81,7 @@ const steps = [
 
     <section class="section" aria-labelledby="how-h">
       <div class="wrap">
-        <div class="section-head"><div><span class="eyebrow">How it works</span><h2 id="how-h">Simple, visible, no surprises</h2></div></div>
+        <div class="section-head"><div><h2 id="how-h">Simple, visible, no surprises</h2></div></div>
         <ol class="steps four">
           {steps.map(([h, p], k) => <li class="reveal"><span class="n">{two(k)}</span><h3>{h}</h3><p>{p}</p></li>)}
         </ol>
@@ -92,7 +92,7 @@ const steps = [
       <div class="wrap">
         <h2 id="others-h">Other ways we can help</h2>
         <ul>
-          {others.map((o) => <li><a class={o.tone} href={o.href}><span>{o.eyebrow}</span><span aria-hidden="true">→</span></a></li>)}
+          {others.map((o) => <li><a class={o.tone} href={o.href}>{o.eyebrow}</a></li>)}
         </ul>
       </div>
     </section>
@@ -100,7 +100,7 @@ const steps = [
     <section class="svc-cta">
       <div class="wrap">
         <h2>Have something in mind?</h2>
-        <p>Tell us what you're trying to do. We'll reply with a straight answer on whether we can help and what it would take.</p>
+        <p>Tell us what you’re trying to do. We’ll reply with a straight answer on whether we can help and what it would take.</p>
         <a class="btn" href={"mailto:" + SITE.email + "?subject=" + encodeURIComponent(s.eyebrow)}>Email us</a>
       </div>
     </section>

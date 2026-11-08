@@ -1,0 +1,8 @@
+---
+// A real screenshot of our own work, in the visitor's colour scheme. Sample data only.
+const { shot, cls = "", eager = false } = Astro.props;
+---
+<picture class={`shot ${cls}`.trim()}>
+  <source srcset={shot.dark} media="(prefers-color-scheme: dark)" />
+  <img src={shot.light} alt={shot.alt} width={shot.w} height={shot.h} loading={eager ? "eager" : "lazy"} decoding="async" />
+</picture>

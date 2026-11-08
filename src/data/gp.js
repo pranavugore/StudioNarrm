@@ -98,7 +98,7 @@ const [ESSENTIAL, TURNKEY] = PACKAGES;
 // Funding: only what the official sources say. Never promise a grant or claim lost payments.
 export const FUNDING = [
   ["PIP Digital Health Incentive", "To be eligible, practices need standards-compliant secure messaging, use it where feasible, and keep a written policy encouraging its use. Both packages set up and test secure messaging and give you that policy.", 5],
-  ["Your primary health network", "Victorian PHNs run digital health programs and secure messaging support for practices. Ask yours whether any practice support or grant is open; we'll give you a written scope and quote to attach to an application.", 6],
+  ["Your primary health network", "Victorian PHNs run digital health programs and secure messaging support for practices. Ask yours whether any practice support or grant is open; we’ll give you a written scope and quote to attach to an application.", 6],
 ];
 
 export const STEPS = [
@@ -109,31 +109,31 @@ export const STEPS = [
 ];
 
 export const TRUST = [
-  ["No patient records needed to start", "We work on policies, accounts and settings. We don't need to see clinical records to do it."],
+  ["No patient records needed to start", "We work on policies, accounts and settings. We don’t need to see clinical records to do it."],
   ["Inside the software you already use", "Secure messaging and access controls are set up in your existing practice software and providers, not a new system to learn."],
   ["Privacy first", "We work to the Australian Privacy Principles, and anything we set up keeps data in Australia."],
-  ["You stay in control", "We write the policy for you to review and adopt. We help you meet Rule 21; we don't give legal advice or certify compliance."],
+  ["You stay in control", "We write the policy for you to review and adopt. We help you meet Rule 21; we don’t give legal advice or certify compliance."],
 ];
 
 export const GP_FAQ = [
   ["What is Rule 21?", "Rule 21 of the My Health Records Rules 2026 says that, from 1 October 2026, every healthcare provider organisation that uses My Health Record must have a written Security and Access Policy. It covers managing user access, staff training and handling My Health Record data breaches, and the Australian Digital Health Agency may check that it is in place."],
   ["Does a small practice need one?", "Yes. The rule applies to every organisation that participates in My Health Record, regardless of size."],
   ["What does it cost?", `There are two fixed-fee packages for practices with 1 to 5 GPs and 3 to 8 staff: ${ESSENTIAL.name} at ${money(ESSENTIAL.price)} plus GST, and ${TURNKEY.name} at ${money(TURNKEY.price)} plus GST. The first ${numberWord(FOUNDING.places)} clinics get a founding price of ${money(ESSENTIAL.founding)} or ${money(TURNKEY.founding)} plus GST. The optional monthly care plan is ${money(CARE_PLAN.price)} plus GST a month on a 12-month term. Larger practices are quoted after the free check.`],
-  ["What's the difference between the two packages?", "Essential puts your Rule 21 policy, records, core security, secure messaging and a short remote training session in place. Turnkey adds live training for all staff, moves your most frequent fax contacts to secure messaging, tests a restore from backup, and includes 30 days of support after go-live."],
-  ["Can funding help pay for it?", "Possibly. The PIP Digital Health Incentive asks practices to have secure messaging and a written policy encouraging its use, which both packages cover. Victorian primary health networks also run digital health support and sometimes grants, so it's worth asking yours. We'll give you a written scope and quote for any application, but we can't promise funding."],
+  ["What’s the difference between the two packages?", "Essential puts your Rule 21 policy, records, core security, secure messaging and a short remote training session in place. Turnkey adds live training for all staff, moves your most frequent fax contacts to secure messaging, tests a restore from backup, and includes 30 days of support after go-live."],
+  ["Can funding help pay for it?", "Possibly. The PIP Digital Health Incentive asks practices to have secure messaging and a written policy encouraging its use, which both packages cover. Victorian primary health networks also run digital health support and sometimes grants, so it’s worth asking yours. We’ll give you a written scope and quote for any application, but we can’t promise funding."],
   ["How long does it take?", "Usually two to four weeks from the go-ahead, depending on staff availability. Most of the work is done remotely."],
-  ["Can a GP clinic stop using fax?", "Usually, yes. Most referrals and results can move to secure messaging that works inside your practice software. On the free check we confirm what's possible with your software and the services you exchange documents with."],
-  ["Do you need access to patient records?", "No. The work is about policies, user accounts, security settings and message routing. We don't need to see clinical records."],
-  ["Do you work outside Melbourne?", "Yes. We focus on regional and rural clinics across Victoria, including Gippsland, Western Victoria and the Murray region. Set-up is remote, so distance isn't a problem."],
+  ["Can a GP clinic stop using fax?", "Usually, yes. Most referrals and results can move to secure messaging that works inside your practice software. On the free check we confirm what’s possible with your software and the services you exchange documents with."],
+  ["Do you need access to patient records?", "No. The work is about policies, user accounts, security settings and message routing. We don’t need to see clinical records."],
+  ["Do you work outside Melbourne?", "Yes. We focus on regional and rural clinics across Victoria, including Gippsland, Western Victoria and the Murray region. Set-up is remote, so distance isn’t a problem."],
 ];
 
-// Rule 21 readiness self-check: [question, what to do if the answer isn't yes]
+// Rule 21 readiness self-check: [question, what to do if the answer isn’t yes]
 export const CHECK = [
   ["Does your practice have a written Security and Access Policy that covers My Health Record?", "Write a Security and Access Policy tailored to your practice."],
   ["Has the policy been updated for the Rule 21 changes from 1 October 2026?", "Update the policy for Rule 21, including data breach handling."],
   ["Does every staff member log in with their own account, with no shared logins?", "Give every user their own login so access can be traced to a person."],
   ["Do you have a written process for adding, changing, suspending and removing user access?", "Document how access is granted, changed and removed when staff join or leave."],
-  ["Do you review who has access at least every few months?", "Set a regular access review and record when it's done."],
+  ["Do you review who has access at least every few months?", "Set a regular access review and record when it’s done."],
   ["Can you see who accessed what in your clinical software and My Health Record?", "Turn on and check access logs."],
   ["Have all staff had My Health Record privacy and security training in the last 12 months, with records kept?", "Run refresher training and keep a training register."],
   ["Do you have a written plan for responding to a data breach, including My Health Record breaches?", "Write a breach response plan and make sure staff know it."],

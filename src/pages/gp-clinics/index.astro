@@ -45,11 +45,9 @@ const jsonld = [
       <div class="wrap">
         <div class="text">
           <nav class="crumbs mono" aria-label="Breadcrumb"><a href="/">Home</a> / <span>GP clinics</span></nav>
-          <p class="kicker">For regional and rural GP clinics in Victoria</p>
-          <span class="eyebrow">Rule 21 · Fax-free</span>
-          <h1 class="caps">Rule 21 sorted. <i>Fax</i> gone.</h1>
-          <p class="lead">Since 1 October 2026, every practice that uses My Health Record needs a written Security and Access Policy under Rule 21. We put it in place for you at a fixed fee, tighten the security basics, and replace fax with secure messaging inside the practice software you already use.</p>
-          <div class="cta"><a class="btn tone" href={mail(GP.checkSubject)}>Book a free 20-minute Rule 21 check</a><a class="btn ghost" href="#check">Check your readiness in 2 minutes</a></div>
+          <h1 class="caps">Rule 21 sorted. Fax gone.</h1>
+          <p class="lead">For regional and rural GP clinics in Victoria: your Rule 21 policy in place and fax replaced, for a fixed fee.</p>
+          <div class="cta"><a class="btn tone" href={mail(GP.checkSubject)}>Book a free Rule 21 check</a><a class="btn ghost" href="#check">Take the 2-minute check</a></div>
         </div>
         <ServiceArt name="clinic" />
       </div>
@@ -57,18 +55,18 @@ const jsonld = [
 
     <section class="section" id="rule-21" aria-labelledby="r21-h">
       <div class="wrap">
-        <div class="section-head"><div><span class="eyebrow">What changed</span><h2 id="r21-h">What Rule 21 asks of your practice</h2></div>
-          <p>The Australian Digital Health Agency may check that your policy is in place and working. Here's what it needs to cover, in plain words. Read our <a href={GP.guideHref}>Rule 21 guide for small practices</a> for more.</p></div>
+        <div class="section-head"><div><h2 id="r21-h">What Rule 21 asks of your practice</h2></div>
+          <p>Since 1 October 2026, every practice that uses My Health Record needs a written Security and Access Policy under Rule 21. We put it in place for you, tighten the security basics, and replace fax with secure messaging inside the practice software you already use. The Australian Digital Health Agency may check that your policy is in place and working. Here’s what it needs to cover, in plain words. Read our <a href={GP.guideHref}>Rule 21 guide for small practices</a> for more.</p></div>
         <ul class="offer four">
           {RULE21.map(([n, d], k) => <li class="reveal"><span class="n mono">{two(k)}</span><h3>{n}</h3><p>{d}</p></li>)}
         </ul>
-        <p class="src-note">Sources: {SOURCES.slice(0, 3).map(([n, u], k) => <>{k ? " · " : ""}<a href={u} rel="noopener">{n}</a></>)}. Many practices also still rely on fax for referrals and results, which is why <a href={SOURCES[3][1]} rel="noopener">primary health networks</a> are pushing secure messaging instead.</p>
+        <p class="src-note">Sources: {SOURCES.slice(0, 3).map(([n, u], k) => <>{k ? ", " : ""}<a href={u} rel="noopener">{n}</a></>)}. Many practices also still rely on fax for referrals and results, which is why <a href={SOURCES[3][1]} rel="noopener">primary health networks</a> are pushing secure messaging instead.</p>
       </div>
     </section>
 
     <section class="section" id="package" aria-labelledby="pkg-h">
       <div class="wrap">
-        <div class="section-head"><div><span class="eyebrow">What's included</span><h2 id="pkg-h">Four things done in every package</h2></div>
+        <div class="section-head"><div><h2 id="pkg-h">Four things done in every package</h2></div>
           <p>The Turnkey package adds live training for all staff, retiring fax for your busiest contacts, a backup restore test and 30 days of support.</p></div>
         <ul class="offer four">
           {PACKAGE.map(([n, d], k) => <li class="reveal"><span class="n mono">{two(k)}</span><h3>{n}</h3><p>{d}</p></li>)}
@@ -78,7 +76,7 @@ const jsonld = [
 
     <section class="section" id="pricing" aria-labelledby="price-h">
       <div class="wrap">
-        <div class="section-head"><div><span class="eyebrow">Pricing</span><h2 id="price-h">Clear prices, no surprises</h2></div><p>All prices exclude GST. {SIZE}</p></div>
+        <div class="section-head"><div><h2 id="price-h">Clear prices, no surprises</h2></div><p>All prices exclude GST. {SIZE}</p></div>
         <div class="plans three">
           {PLANS.map((p, k) => (
             <article class={"plan" + (k === 1 ? " main" : "")}>
@@ -100,8 +98,8 @@ const jsonld = [
 
     <section class="section" id="funding" aria-labelledby="fund-h">
       <div class="wrap">
-        <div class="section-head"><div><span class="eyebrow">Funding</span><h2 id="fund-h">Help with the cost</h2></div>
-          <p>We can't promise funding, but these are worth checking before you start.</p></div>
+        <div class="section-head"><div><h2 id="fund-h">Help with the cost</h2></div>
+          <p>We can’t promise funding, but these are worth checking before you start.</p></div>
         <ul class="offer two">
           {FUNDING.map(([n, d, src]) => <li class="reveal"><h3>{n}</h3><p>{d}</p><p class="src-note">Source: <a href={SOURCES[src][1]} rel="noopener">{SOURCES[src][0]}</a></p></li>)}
         </ul>
@@ -110,7 +108,7 @@ const jsonld = [
 
     <section class="section" id="trust" aria-labelledby="trust-h">
       <div class="wrap">
-        <div class="section-head"><div><span class="eyebrow">Privacy and trust</span><h2 id="trust-h">Health data handled with care</h2></div></div>
+        <div class="section-head"><div><h2 id="trust-h">Health data handled with care</h2></div></div>
         <ul class="offer four">
           {TRUST.map(([n, d]) => <li class="reveal"><h3>{n}</h3><p>{d}</p></li>)}
         </ul>
@@ -119,8 +117,8 @@ const jsonld = [
 
     <section class="section" aria-labelledby="how-h">
       <div class="wrap">
-        <div class="section-head"><div><span class="eyebrow">How it works</span><h2 id="how-h">From first call to done</h2></div>
-          <p>Remote set-up means distance isn't a problem. We work with clinics across {GP.regions.slice(0, -1).join(", ")} and {GP.regions.at(-1)}.</p></div>
+        <div class="section-head"><div><h2 id="how-h">From first call to done</h2></div>
+          <p>Remote set-up means distance isn’t a problem. We work with clinics across {GP.regions.slice(0, -1).join(", ")} and {GP.regions.at(-1)}.</p></div>
         <ol class="steps four">
           {STEPS.map(([h, p], k) => <li class="reveal"><span class="n">{two(k)}</span><h3>{h}</h3><p>{p}</p></li>)}
         </ol>
@@ -129,7 +127,7 @@ const jsonld = [
 
     <section class="section check" id="check" aria-labelledby="check-h">
       <div class="wrap">
-        <div class="section-head"><div><span class="eyebrow">Self-check</span><h2 id="check-h">How ready is your practice for Rule 21?</h2></div>
+        <div class="section-head"><div><h2 id="check-h">How ready is your practice for Rule 21?</h2></div>
           <p>Ten quick questions. Your answers stay in your browser and nothing is sent anywhere. This is a guide, not an official assessment.</p></div>
         <form id="r21" class="quiz">
           <ol>
@@ -160,7 +158,7 @@ const jsonld = [
 
     <section class="section faq" id="faq" aria-labelledby="faq-h">
       <div class="wrap">
-        <div><span class="eyebrow">Questions</span><h2 id="faq-h">GP clinic questions</h2></div>
+        <div><h2 id="faq-h">GP clinic questions</h2></div>
         <div>
           {GP_FAQ.map(([q, a], k) => <details open={k === 0}><summary>{q}</summary><p>{a}</p></details>)}
         </div>
@@ -170,8 +168,8 @@ const jsonld = [
     <section class="svc-cta">
       <div class="wrap">
         <h2>Start with a free 20-minute check</h2>
-        <p>We'll tell you where your practice stands on Rule 21, security and fax, and what it would take to fix. No obligation.</p>
-        <div class="cta"><a class="btn" href={mail(GP.checkSubject)}>Book the free check</a><a class="btn ghost" href={GP.pdf} download>Download the one-page offer (PDF)</a></div>
+        <p>We’ll tell you where your practice stands on Rule 21, security and fax, and what it would take to fix. No obligation.</p>
+        <div class="cta"><a class="btn" href={mail(GP.checkSubject)}>Book the free check</a><a class="btn ghost" href={GP.pdf} download>Download the offer (PDF)</a></div>
       </div>
     </section>
   </main>

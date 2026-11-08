@@ -1,5 +1,6 @@
 ---
 import ServiceArt from "./ServiceArt.astro";
+import Shot from "./Shot.astro";
 import { two } from "../lib/format.js";
 const { s, i } = Astro.props;
 const flip = i % 2 === 1;
@@ -8,17 +9,17 @@ const flip = i % 2 === 1;
   <div class="wrap">
     <div class="text reveal">
       <p class="kicker">{s.kicker}</p>
-      <span class="eyebrow"><span class="svc-n">{two(i)}</span> {s.eyebrow}</span>
       <h2 id={`${s.slug}-h`} class="caps" set:html={s.title} />
+      <p class="svc-label">{s.eyebrow}</p>
       <p>{s.summary}</p>
       <ul class="feats">
         {s.feats.map(([b, t], k) => <li><span class="n">{two(k)}</span><div><b>{b}</b><span>{t}</span></div></li>)}
       </ul>
       <div class="cta">
-        <a class="btn tone" href={s.href}>Know more <span aria-hidden="true">→</span><span class="sr"> about {s.eyebrow}</span></a>
+        <a class="btn tone" href={s.href}>See how it works<span class="sr"> for {s.eyebrow}</span></a>
         <a class="btn ghost" href="/#contact">Talk to us</a>
       </div>
     </div>
-    <ServiceArt name={s.art} cls="reveal" />
+    {s.shot ? <div class="art art-shot reveal"><Shot shot={s.shot} /></div> : <ServiceArt name={s.art} cls="reveal" />}
   </div>
 </section>
