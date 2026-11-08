@@ -12,11 +12,13 @@ export const ALL_SERVICES = [
     href: "/data-viz/",
     tone: "t-data",
     art: "data",
+    // A real screenshot (sample data) of the dashboard on /data-viz/, shown instead of the drawing.
+    shot: { light: "/assets/shots/dashboard-light.webp", dark: "/assets/shots/dashboard-dark.webp", w: 1710, h: 1434, alt: "Sample sales dashboard we built: revenue, orders, conversion and members, with a daily trend, segment split, channels and weekday orders" },
     eyebrow: "Data analytics & visualisation",
     tags: "Dashboards · Data stories",
     blurb: "dashboards, data pipelines and interactive data stories, with live examples",
     kicker: "Drowning in spreadsheets?",
-    title: "See your numbers <i>clearly</i>",
+    title: "See your numbers clearly",
     summary: "We pull your data out of forms, CRMs and spreadsheets into one clean model, then build the views people actually use: an everyday dashboard, or something more memorable when the story matters.",
     feats: [
       ["Dashboards", "Trends, comparisons and shares at a glance, refreshed automatically so nobody updates them by hand."],
@@ -33,8 +35,8 @@ export const ALL_SERVICES = [
     tags: "n8n · RPA · AI agents",
     blurb: "workflow automation (n8n), robotic process automation, system sync and scheduled reporting",
     kicker: "Same task, every day, by hand?",
-    title: "Automate the <i>boring</i> bits",
-    summary: "Copy and paste between inboxes, spreadsheets and systems is where good people's weeks disappear. We replace it with workflows and robots that run quietly in the background and tell you when something needs a human.",
+    title: "Automate the boring bits",
+    summary: "Copy and paste between inboxes, spreadsheets and systems is where good people’s weeks disappear. We replace it with workflows and robots that run quietly in the background and tell you when something needs a human.",
     feats: [
       ["n8n automations", "Self-hosted workflows that connect your apps, sync records, load databases and send reports on schedule."],
       ["AI agents in the flow", "Claude-powered steps that research, draft and turn messy free text into clean records, with a human check."],
@@ -70,7 +72,7 @@ export const ALL_SERVICES = [
     tags: "AEO · GEO · MCP",
     blurb: "AI visibility (AEO/GEO), structured data, llms.txt, APIs and MCP servers for AI agents, internal AI agents",
     kicker: "Will AI assistants recommend you?",
-    title: "Get <i>agent-ready</i>",
+    title: "Get agent-ready",
     summary: "People now ask ChatGPT, Claude, Gemini and Perplexity what to buy and who to call, and AI agents are starting to book and order on their behalf. We make your business easy for them to find, understand and act on.",
     feats: [
       ["Be found by AI", "Structured data, llms.txt and content shaped for answer engines (AEO and GEO), not just Google."],
@@ -80,7 +82,7 @@ export const ALL_SERVICES = [
     page: {
       lead: "Search is shifting from ten blue links to a single AI answer. If your information is buried in PDFs, images and inconsistent pages, assistants will skip you or get you wrong. Getting agent-ready means tidying what you publish and opening a safe, structured door for agents to use.",
       offer: [
-        ["AI visibility check", "How ChatGPT, Claude, Gemini and Perplexity describe your business today, and what's missing."],
+        ["AI visibility check", "How ChatGPT, Claude, Gemini and Perplexity describe your business today, and what’s missing."],
         ["Structured data", "Schema.org markup for your organisation, services, products, FAQs and locations."],
         ["llms.txt and clean content", "A plain, machine-readable summary of who you are and what you offer."],
         ["Agent access (API or MCP)", "A controlled way for AI agents to look things up or make a booking, with limits you set."],
@@ -97,12 +99,12 @@ export const ALL_SERVICES = [
     eyebrow: "Custom apps and websites",
     tags: "Websites · Web apps · Mobile",
     blurb: "custom websites, AppSheet and low-code apps, web and mobile apps, portals and product MVPs",
-    kicker: "Off-the-shelf doesn't quite fit?",
-    title: "Apps and websites built for <i>your</i> way of working",
+    kicker: "Off-the-shelf doesn’t quite fit?",
+    title: "Apps and websites built for your way of working",
     summary: "From a quick AppSheet app for the team in the field to a fast, custom website or a full web platform, we design and build software around how your people actually work, and ship it quickly with AI-assisted development.",
     feats: [
-      ["Quick start with AppSheet", "When speed matters, an AppSheet app on top of your existing spreadsheets can be in people's hands in days."],
-      ["Full custom builds", "Web and mobile apps with logins, payments and dashboards, like Stolen Minutes, an app we're building ourselves."],
+      ["Quick start with AppSheet", "When speed matters, an AppSheet app on top of your existing spreadsheets can be in people’s hands in days."],
+      ["Full custom builds", "Web and mobile apps with logins, payments and dashboards, like Stolen Minutes, an app we’re building ourselves."],
       ["Custom websites", "Fast, accessible websites that are easy to update and built to be found in search and by AI assistants."],
       ["Integration first", "Apps that talk to your existing systems instead of becoming one more silo."],
     ],
@@ -115,11 +117,11 @@ export const ALL_SERVICES = [
         ["Internal tools", "Admin screens and dashboards that replace fragile spreadsheets."],
         ["Product MVPs", "Turn an idea into a working first version you can put in front of real users."],
         ["Integrations", "Connect the app to your CRM, payments, email and data platform."],
-        ["Support and iteration", "Small, regular improvements after launch, based on how it's used."],
+        ["Support and iteration", "Small, regular improvements after launch, based on how it’s used."],
       ],
       examples: [
-        ["Stolen Minutes", "Product · In progress", "An app we're designing and building ourselves, from idea to launch: product design, the app itself, the back end and the data behind it."],
-        ["AppSheet apps", "Quick implementation", "Mobile apps for field teams, volunteers and daily operations, built on top of existing spreadsheets and backed by dashboards. The fastest way to get a working tool in people's hands."],
+        ["Stolen Minutes", "Product · In progress", "An app we’re designing and building ourselves, from idea to launch: product design, the app itself, the back end and the data behind it."],
+        ["AppSheet apps", "Quick implementation", "Mobile apps for field teams, volunteers and daily operations, built on top of existing spreadsheets and backed by dashboards. The fastest way to get a working tool in people’s hands."],
       ],
     },
   },
@@ -133,7 +135,7 @@ export const ALL_SERVICES = [
     tags: "Script · Edit · Every format",
     blurb: "short-form video ads, script to edit, cut for every platform",
     kicker: "Need to be seen, not scrolled past?",
-    title: "Short videos that <i>stop</i> the scroll",
+    title: "Short videos that stop the scroll",
     summary: "Short-form video ads for social and the web: script, storyboard, edit and captions, cut for every format. AI-assisted production keeps it fast and affordable, so you can test several versions instead of betting on one.",
     feats: [
       ["Script and storyboard", "A clear hook, one message and a call to action, planned before anything is produced."],
@@ -162,15 +164,15 @@ export const ALL_SERVICES = [
     tags: "Research · Outreach · Follow-up",
     blurb: "AI-assisted prospect research, personalised email outreach, follow-ups and reporting",
     kicker: "Great offer, too few people know?",
-    title: "Reach the <i>right</i> people",
+    title: "Reach the right people",
     summary: "Finding the right partners and customers, writing to them personally, and following up on time is hard to do by hand. We build outreach systems that research, draft and schedule, with you approving what goes out.",
     feats: [
       ["Prospect research", "AI agents that find and qualify organisations and people who fit what you offer."],
       ["Personal outreach at scale", "Drafted emails that read like you wrote them, with sensible sending limits."],
-      ["Follow-ups and reporting", "Timed follow-ups, reply tracking and a simple view of what's working."],
+      ["Follow-ups and reporting", "Timed follow-ups, reply tracking and a simple view of what’s working."],
     ],
     page: {
-      lead: "Good outreach is personal, well timed and persistent, which is exactly what's hard to keep up by hand. We set up the research, writing, sending and follow-up as a system you control, so it keeps going while you focus on the conversations that come back.",
+      lead: "Good outreach is personal, well timed and persistent, which is exactly what’s hard to keep up by hand. We set up the research, writing, sending and follow-up as a system you control, so it keeps going while you focus on the conversations that come back.",
       offer: [
         ["Audience and list building", "Define who you want to reach and build a clean, qualified list."],
         ["AI-assisted research", "Agents that gather the context needed to make each message relevant."],
