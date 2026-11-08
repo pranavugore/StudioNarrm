@@ -47,9 +47,14 @@ const jsonld = [
           <nav class="crumbs mono" aria-label="Breadcrumb"><a href="/">Home</a> / <span>GP clinics</span></nav>
           <h1 class="caps">Rule 21 sorted. Fax gone.</h1>
           <p class="lead">For regional and rural GP clinics in Victoria: your Rule 21 policy in place and fax replaced, for a fixed fee.</p>
-          <div class="cta"><a class="btn tone" href={mail(GP.checkSubject)}>Book a free Rule 21 check</a><a class="btn ghost" href="#check">Take the 2-minute check</a></div>
+          <div class="cta"><a class="btn ghost" href="#check">Take the 2-minute check</a></div>
         </div>
-        <ServiceArt name="clinic" />
+        <aside class="rd-offer" aria-label="The offer at a glance">
+          <p class="rd-offer-price"><span>From</span><b>{FROM_PRICE}</b><span>+ GST, fixed fee</span></p>
+          <p>Two packages for practices with 1 to 5 GPs. The first {FOUNDING.places} clinics get a founding price.</p>
+          <a class="btn tone" href={mail(GP.checkSubject)}>Book a free Rule 21 check</a>
+          <a class="rd-offer-link" href="#pricing">Compare the packages</a>
+        </aside>
       </div>
     </section>
 
@@ -57,9 +62,9 @@ const jsonld = [
       <div class="wrap">
         <div class="section-head"><div><h2 id="r21-h">What Rule 21 asks of your practice</h2></div>
           <p>Since 1 October 2026, every practice that uses My Health Record needs a written Security and Access Policy under Rule 21. We put it in place for you, tighten the security basics, and replace fax with secure messaging inside the practice software you already use. The Australian Digital Health Agency may check that your policy is in place and working. Here’s what it needs to cover, in plain words. Read our <a href={GP.guideHref}>Rule 21 guide for small practices</a> for more.</p></div>
-        <ul class="offer four">
-          {RULE21.map(([n, d], k) => <li class="reveal"><span class="n mono">{two(k)}</span><h3>{n}</h3><p>{d}</p></li>)}
-        </ul>
+        <ol class="rd-rows">
+          {RULE21.map(([n, d]) => <li><h3>{n}</h3><p>{d}</p></li>)}
+        </ol>
         <p class="src-note">Sources: {SOURCES.slice(0, 3).map(([n, u], k) => <>{k ? ", " : ""}<a href={u} rel="noopener">{n}</a></>)}. Many practices also still rely on fax for referrals and results, which is why <a href={SOURCES[3][1]} rel="noopener">primary health networks</a> are pushing secure messaging instead.</p>
       </div>
     </section>
@@ -77,14 +82,16 @@ const jsonld = [
     <section class="section" id="pricing" aria-labelledby="price-h">
       <div class="wrap">
         <div class="section-head"><div><h2 id="price-h">Clear prices, no surprises</h2></div><p>All prices exclude GST. {SIZE}</p></div>
-        <div class="plans three">
+        <div class="rd-table">
           {PLANS.map((p, k) => (
-            <article class={"plan" + (k === 1 ? " main" : "")}>
-              {k === 1 && <span class="badge">Most complete</span>}
-              <h3>{p.name}</h3>
-              <p class="price"><b>{money(p.price)}</b> <span>+ GST {p.unit}</span></p>
+            <article class={"rd-plan" + (k === 1 ? " main" : "")}>
+              <div class="rd-plan-head">
+                <h3>{p.name}</h3>
+                {k === 1 && <span class="badge">Most complete</span>}
+                <p class="price"><b>{money(p.price)}</b> <span>+ GST {p.unit}</span></p>
+                <p class="note">{p.note}</p>
+              </div>
               <ul>{p.items.map((it) => <li>{it}</li>)}</ul>
-              <p class="note">{p.note}</p>
             </article>
           ))}
         </div>
