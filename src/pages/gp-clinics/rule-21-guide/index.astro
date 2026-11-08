@@ -28,8 +28,8 @@ const jsonld = [
     <article class="guide">
       <div class="wrap">
         <nav class="crumbs mono" aria-label="Breadcrumb"><a href="/">Home</a> / <a href={GP.href}>GP clinics</a> / <span>Rule 21 guide</span></nav>
-        <span class="eyebrow">Guide · Reviewed {reviewed}</span>
         <h1>Rule 21 explained for small GP practices</h1>
+        <p class="meta">Guide, reviewed {reviewed}</p>
         <p class="lead">Since 1 October 2026, every practice that uses My Health Record must have a written Security and Access Policy under Rule 21 of the My Health Records Rules 2026. This guide explains what that means for a small practice and what you can do about it this month.</p>
 
         <h2>Who it applies to</h2>
@@ -39,7 +39,7 @@ const jsonld = [
         <ul class="plain">
           {RULE21.map(([n, d]) => <li><b>{n}.</b> {d}</li>)}
         </ul>
-        <p>The policy has to fit how your practice actually works. A template downloaded and filed away won't reflect your staff, your software or your processes, and that is what a check would look at.</p>
+        <p>The policy has to fit how your practice actually works. A template downloaded and filed away won’t reflect your staff, your software or your processes, and that is what a check would look at.</p>
 
         <h2>What you can do this month</h2>
         <ol class="plain">
@@ -48,7 +48,7 @@ const jsonld = [
         <p>Not sure where you stand? Take the <a href={GP.href + "#check"}>two-minute Rule 21 self-check</a>.</p>
 
         <h2>Where fax fits in</h2>
-        <p>Fax isn't part of Rule 21, but it sits in the same conversation. Faxed referrals and results are hard to track, easy to misdirect and impossible to audit properly. Primary health networks in Victoria are encouraging practices to use secure messaging instead of fax and email. Secure messaging works inside most practice software, so documents arrive straight into the patient's file.</p>
+        <p>Fax isn’t part of Rule 21, but it sits in the same conversation. Faxed referrals and results are hard to track, easy to misdirect and impossible to audit properly. Primary health networks in Victoria are encouraging practices to use secure messaging instead of fax and email. Secure messaging works inside most practice software, so documents arrive straight into the patient’s file.</p>
 
         <h2>Sources</h2>
         <ul class="plain">

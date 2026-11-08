@@ -47,11 +47,11 @@ const jsonld = [
     <article class="guide">
       <div class="wrap">
         <nav class="crumbs mono" aria-label="Breadcrumb"><a href="/">Home</a> / <a href={ARTICLES_HREF}>Articles</a> / <span>{title}</span></nav>
-        <span class="eyebrow">
-          <time datetime={published}>{longDate(published)}</time>
-          {updated && <> · Updated <time datetime={modified}>{longDate(modified)}</time></>}
-        </span>
         <h1>{title}</h1>
+        <p class="meta">
+          <time datetime={published}>{longDate(published)}</time>
+          {updated && <>, updated <time datetime={modified}>{longDate(modified)}</time></>}
+        </p>
         <p class="lead">{description}</p>
         <div class="prose">
           <Content />
@@ -59,7 +59,7 @@ const jsonld = [
         {tags.length > 0 && <ul class="tags article-tags" aria-label="Topics">{tags.map((t) => <li>{t}</li>)}</ul>}
         <aside class="guide-cta">
           <h2>Want help with this?</h2>
-          <p>Studio Narrm designs and builds data dashboards, automation, AI agents and custom apps. Tell us what you're trying to do and we'll reply with a plan.</p>
+          <p>Studio Narrm designs and builds data dashboards, automation, AI agents and custom apps. Tell us what you’re trying to do and we’ll reply with a plan.</p>
           <a class="btn tone" href="/#contact">Start a project</a>
         </aside>
       </div>

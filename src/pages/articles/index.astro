@@ -29,7 +29,6 @@ const jsonld = [ld({
   <main class="wrap-main t-articles">
     <section class="page-hero">
       <div class="wrap">
-        <span class="eyebrow">Articles</span>
         <h1>Articles</h1>
         <p class="lead">Practical notes from Studio Narrm on data dashboards, workflow automation, AI agents and custom apps, written for small businesses, clinics and teams.</p>
       </div>
@@ -43,7 +42,7 @@ const jsonld = [ld({
               {articles.map((a) => (
                 <li>
                   <article>
-                    <p class="mono article-meta"><time datetime={isoDate(a.data.date)}>{longDate(isoDate(a.data.date))}</time>{a.data.draft && " · Draft"}</p>
+                    <p class="mono article-meta"><time datetime={isoDate(a.data.date)}>{longDate(isoDate(a.data.date))}</time>{a.data.draft && ", Draft"}</p>
                     <h2><a href={articleHref(a)}>{a.data.title}</a></h2>
                     <p>{a.data.description}</p>
                   </article>
