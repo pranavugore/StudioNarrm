@@ -1,0 +1,48 @@
+---
+import Base from "../../layouts/Base.astro";
+import { SITE } from "../../data/site.js";
+import { originOf, breadcrumbs, ld } from "../../lib/schema.js";
+const origin = originOf(Astro.site);
+const title = "Privacy and cookies | Studio Narrm";
+const description = "How studionarrm.com uses Google Tag Manager and Google Analytics cookies to understand visits, and how to opt out.";
+const jsonld = [ld({
+  "@type": "WebPage",
+  name: "Privacy and cookies",
+  url: `${origin}/privacy/`,
+  breadcrumb: breadcrumbs(origin, [["Home", "/"], ["Privacy", "/privacy/"]]),
+})];
+---
+<Base title={title} description={description} jsonld={jsonld}>
+<main class="wrap-main">
+    <section class="page-hero">
+      <div class="wrap">
+        <span class="eyebrow">Privacy</span>
+        <h1>Privacy and cookies</h1>
+        <p class="lead">This site uses Google Tag Manager and Google Analytics to understand how people find and use it, such as which pages are read and roughly where visits come from. That helps us improve the site. We don't sell this data or use it to identify you.</p>
+      </div>
+    </section>
+
+    <section aria-labelledby="cookies-h">
+      <div class="wrap">
+        <h2 id="cookies-h">Cookies we use</h2>
+        <div class="grid">
+          <div class="card">
+            <h3>Analytics cookies</h3>
+            <p>Google Analytics sets cookies (named <code>_ga</code> and <code>_ga_*</code>) that count visits and page views. Google processes this data under its own <a href="https://policies.google.com/privacy">privacy policy</a>; see <a href="https://policies.google.com/technologies/partner-sites">how Google uses data from sites that use its services</a>.</p>
+          </div>
+          <div class="card">
+            <h3>Opting out</h3>
+            <p>You can block or delete cookies in your browser settings, or install the <a href="https://tools.google.com/dlpage/gaoptout">Google Analytics opt-out add-on</a>. The site works the same without them.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section aria-labelledby="contact-h">
+      <div class="wrap">
+        <h2 id="contact-h">Questions</h2>
+        <p>If you send us an enquiry, we use your details only to reply. For any privacy question, email <a href={`mailto:${SITE.email}`}>{SITE.email}</a>.</p>
+      </div>
+    </section>
+  </main>
+</Base>

@@ -18,6 +18,8 @@ export const SITE = {
   description:
     "Solution Designer and Architect with 19 years of experience building enterprise applications, integrations, data analytics solutions and workflow automation.",
   updated: "2026-10-27",
+  // Google Tag Manager container. Analytics (and later Meta Pixel) tags are managed inside GTM. Set to "" to turn tracking off.
+  gtmId: "GTM-KTJBT87D",
 };
 
 // Topics the studio works in, for knowsAbout. Keep to capabilities, not clients.
