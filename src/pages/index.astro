@@ -10,8 +10,8 @@ import { FAQ, faqJsonLd } from "../data/faq.js";
 import { SHOW_GP } from "../data/flags.js";
 const origin = originOf(Astro.site);
 const NUM = capitalise(numberWord(SERVICES.length));
-const title = "Studio Narrm | Data, Automation & AI Agents, Melbourne";
-const description = "Studio Narrm is a Melbourne studio for data dashboards, n8n workflow automation, AI agents, custom apps and websites, founded by Pranav Gore, a solution architect with 19 years in banking, telecom and non-profits.";
+const title = "Studio Naarm | Data, Automation & AI Agents, Melbourne";
+const description = "Studio Naarm is a Melbourne studio for data dashboards, n8n workflow automation, AI agents, custom apps and websites, founded by Pranav Gore, a solution architect with 19 years in banking, telecom and non-profits.";
 // The home page carries the full graph (with the founder's credentials and skills) instead of Base's,
 // so it sets includeBase={false}. Base stamps dateModified on the ProfilePage node.
 const jsonld = [
@@ -57,7 +57,7 @@ const MARQUEE = ["Banking", "Telecommunications", "Telstra", "Retail", "Non-prof
           <span class="eyebrow">Systems, Data &amp; Automation</span>
           <p class="kicker">Calmly fixing chaos since 2007…</p>
           <h1 id="hero-h"><span class="line">Messy process in.</span> <span class="line"><span class="hl">Working system</span> out.</span></h1>
-          <p class="lead">Studio Narrm is a Melbourne studio that designs <strong>and</strong> builds: <strong>n8n automations and AI agents</strong>, <strong>dashboards</strong>, <strong>apps</strong>, and <strong>custom websites</strong>.</p>
+          <p class="lead">Studio Naarm is a Melbourne studio that designs <strong>and</strong> builds: <strong>n8n automations and AI agents</strong>, <strong>dashboards</strong>, <strong>apps</strong>, and <strong>custom websites</strong>.</p>
           <div class="cta">
             <a class="btn" href="#contact">Tell us about your problem</a>
             <a class="btn ghost" href="#services">See the work</a>
@@ -95,7 +95,7 @@ const MARQUEE = ["Banking", "Telecommunications", "Telstra", "Retail", "Non-prof
         </div>
         <div>
           <p>Pranav has spent <strong>19 years</strong> designing systems that big organisations depend on: <strong>core banking integration</strong>, <strong>telecom order fulfilment</strong>, and a fleet of <strong>100+ automation robots</strong> at Telstra.</p>
-          <p>At Studio Narrm we build the whole thing, fast, with <strong>AI-assisted development</strong>. Data pipelines, AI agents, dashboards, mobile apps and full platforms. Different problems, same habit: understand it properly, keep it simple, ship it.</p>
+          <p>At Studio Naarm we build the whole thing, fast, with <strong>AI-assisted development</strong>. Data pipelines, AI agents, dashboards, mobile apps and full platforms. Different problems, same habit: understand it properly, keep it simple, ship it.</p>
           <ul class="thumbs" aria-label="Jump to a service" style={`--cols:${SERVICES.length};--cols-sm:${SERVICES.length > 4 ? 3 : SERVICES.length}`}>
             {SERVICES.map((sv) => <li><a class={sv.tone} href={"#" + sv.slug} title={sv.eyebrow}><svg viewBox="0 0 52 52" aria-hidden="true" focusable="false" set:html={ICONS[sv.slug]} /><span class="sr">{sv.eyebrow}</span></a></li>)}
           </ul>

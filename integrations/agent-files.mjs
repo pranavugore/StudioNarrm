@@ -98,7 +98,7 @@ export default function agentFiles({ order = [] } = {}) {
         pages.sort((a, b) => rank(a) - rank(b) || a.path.localeCompare(b.path));
 
         const full = pages.map((p) => `<page url="${p.url}">\n\n${p.md}\n</page>`).join("\n\n");
-        await writeFile(join(root, "llms-full.txt"), `# Studio Narrm: full site text\n\n> Every page of ${site} as Markdown, for AI assistants and agents. Summary and links: ${site}/llms.txt\n\n${full}\n`);
+        await writeFile(join(root, "llms-full.txt"), `# Studio Naarm: full site text\n\n> Every page of ${site} as Markdown, for AI assistants and agents. Summary and links: ${site}/llms.txt\n\n${full}\n`);
 
         const headersFile = join(root, "_headers");
         let headers = "";

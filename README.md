@@ -1,4 +1,4 @@
-# studionarrm website
+# studionaarm website
 
 A static website built with [Astro](https://astro.build). It produces plain HTML, CSS and JS in `dist/`, so it runs on Cloudflare Pages, Vercel, Netlify or any static host.
 
@@ -37,9 +37,20 @@ npm run preview   # serves the built dist/ folder
 
 The sitemap (`sitemap-index.xml`) is generated automatically on every build.
 
+## Domain move (November 2026)
+
+The brand is now Studio Naarm and the primary address is `https://studionaarm.com`. Before this change, studionarrm.com was primary and studionaarm.com redirected to it, so the Cloudflare side has to flip at the same time as this code ships:
+
+1. Delete (or disable) the redirect rule that sends studionaarm.com to studionarrm.com. Otherwise the two domains redirect to each other.
+2. On the Worker, **Settings → Domains & Routes → Add → Custom domain**: add `studionaarm.com` and `www.studionaarm.com`.
+3. Add a 301 redirect rule on the studionarrm.com zone: `studionarrm.com/*` and `www.studionarrm.com/*` to `https://studionaarm.com/${1}`, keeping the path and query.
+4. Remove studionarrm.com from the Worker's custom domains once the redirect is in place.
+5. Repeat the AI crawler checks below for studionaarm.com, add it as a new property in Google Search Console (use **Change of address** from the old one) and submit `https://studionaarm.com/sitemap-index.xml`.
+6. In GA4, update the web data stream URL to studionaarm.com. GTM needs no change.
+
 ## How it deploys today
 
-The live site is a Cloudflare **Worker** (studionarrm) connected to this repo with Workers Builds. Every push to `main` runs `npm run build` then `npx wrangler deploy`, which serves `dist/` as static assets on studionarrm.com. There is no `wrangler.jsonc`; Wrangler works the settings out from the Astro project.
+The live site is a Cloudflare **Worker** (studionarrm) connected to this repo with Workers Builds. Every push to `main` runs `npm run build` then `npx wrangler deploy`, which serves `dist/` as static assets on studionaarm.com. There is no `wrangler.jsonc`; Wrangler works the settings out from the Astro project.
 
 Preview builds for other branches are switched off (Settings → Build → Previews → "Builds for Preview branches"). Cloudflare's preview command, `npx wrangler preview`, needs a `wrangler.jsonc` with a `previews` block, which this repo doesn't have. Adding that file would also change how `main` deploys, so do it as its own change if previews are ever wanted.
 
@@ -55,10 +66,10 @@ The steps below are the original first-time setup notes.
    - Build output directory: `dist`
 4. Under **Environment variables**, add:
    - `NODE_VERSION` = `22`
-   - `SITE_URL` is optional. The site assumes `https://studionarrm.com`. Set it only to build for another address, such as a `*.pages.dev` preview (no trailing slash).
+   - `SITE_URL` is optional. The site assumes `https://studionaarm.com`. Set it only to build for another address, such as a `*.pages.dev` preview (no trailing slash).
 5. Click **Save and Deploy**. Each push to the main branch redeploys automatically.
-6. Custom domain: in the Pages project open **Custom domains → Set up a domain** and add `studionarrm.com` (and `www.studionarrm.com`).
-7. Second domain: add `studionaarm.com` to Cloudflare too, then create a **Redirect Rule** (or Bulk Redirect) that sends every request on `studionaarm.com` and `www.studionaarm.com` to `https://studionarrm.com` with a 301, keeping the path. That catches the common misspelling without creating duplicate content.
+6. Custom domain: in the Pages project open **Custom domains → Set up a domain** and add `studionaarm.com` (and `www.studionaarm.com`).
+7. Old domain: keep `studionarrm.com` (the earlier spelling) on Cloudflare and create a **Redirect Rule** (or Bulk Redirect) that sends every request on `studionarrm.com` and `www.studionarrm.com` to `https://studionaarm.com` with a 301, keeping the path. Old links keep working without creating duplicate content.
 
 ## Deploy to Vercel instead
 
@@ -66,14 +77,14 @@ Import the repo in Vercel. It detects Astro on its own (build `npm run build`, o
 
 ## Let AI crawlers in (Cloudflare)
 
-Cloudflare blocks AI crawlers by default on new domains and can swap our robots.txt for its own. Once studionarrm.com is on Cloudflare:
+Cloudflare blocks AI crawlers by default on new domains and can swap our robots.txt for its own. Once studionaarm.com is on Cloudflare:
 
 1. In the Cloudflare dashboard, open the domain, then **AI Crawl Control** (older dashboards: **Security → Bots**).
 2. Set **Block AI bots** to **Do not block (allow)**.
 3. Turn **off** "Manage your robots.txt" (or "Instruct AI bot traffic with robots.txt"), so ours is served unchanged.
 4. Leave **Bot Fight Mode** off; it challenges ClaudeBot, GPTBot and PerplexityBot. Super Bot Fight Mode is fine only if "Verified bots" is set to **Allow**.
 5. Under **Caching → Configuration**, turn on **Crawler Hints**. It pings search engines (IndexNow) when pages change.
-6. Check: `curl -A "ClaudeBot" -sI https://studionarrm.com/` and `curl -s https://studionarrm.com/robots.txt` should give 200 and our file.
+6. Check: `curl -A "ClaudeBot" -sI https://studionaarm.com/` and `curl -s https://studionaarm.com/robots.txt` should give 200 and our file.
 
 ## Files for AI agents
 
