@@ -1,13 +1,13 @@
 ---
-title: "Welcome to Studio Narrm articles"
-description: "What we write about at Studio Narrm: practical notes on data dashboards, workflow automation, AI agents and getting a small business ready for AI search."
+title: "Welcome to Studio Naarm articles"
+description: "What we write about at Studio Naarm: practical notes on data dashboards, workflow automation, AI agents and getting a small business ready for AI search."
 date: 2026-11-03
-tags: ["Studio Narrm", "Automation", "AI agents"]
+tags: ["Studio Naarm", "Automation", "AI agents"]
 # Starter article. Set draft to false to publish it, or delete this file once real articles are in.
 draft: true
 ---
 
-Studio Narrm is a Melbourne studio that designs and builds data dashboards, workflow automation, AI agents and custom apps. This is where we write about that work in plain English.
+Studio Naarm is a Melbourne studio that designs and builds data dashboards, workflow automation, AI agents and custom apps. This is where we write about that work in plain English.
 
 ## What we'll write about
 

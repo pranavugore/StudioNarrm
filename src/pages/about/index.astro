@@ -2,12 +2,12 @@
 import Base from "../../layouts/Base.astro";
 import { originOf, breadcrumbs, ld } from "../../lib/schema.js";
 const origin = originOf(Astro.site);
-const title = "About Studio Narrm and founder Pranav Gore | Melbourne";
-const description = "About Studio Narrm, a Melbourne studio founded by Pranav Gore: a 19-year career from developer to Solution Architect across telecom, retail, banking and non-profit work. Certifications, education and approach.";
+const title = "About Studio Naarm and founder Pranav Gore | Melbourne";
+const description = "About Studio Naarm, a Melbourne studio founded by Pranav Gore: a 19-year career from developer to Solution Architect across telecom, retail, banking and non-profit work. Certifications, education and approach.";
 // dateModified is stamped by Base from SITE.updated.
 const jsonld = [ld({
   "@type": "AboutPage",
-  name: "About Studio Narrm",
+  name: "About Studio Naarm",
   url: `${origin}/about/`,
   mainEntity: { "@id": `${origin}/#person` },
   breadcrumb: breadcrumbs(origin, [["Home", "/"], ["About", "/about/"]]),
@@ -18,8 +18,8 @@ const jsonld = [ld({
     <section class="page-hero">
       <div class="wrap">
         <span class="eyebrow">About</span>
-        <h1>About Studio Narrm</h1>
-        <p class="lead">Studio Narrm is a Melbourne studio founded by Pranav Gore. Pranav started as a developer in 2007 and grew into solution design and architecture on large transformation programmes, working with stakeholders from many vendors and countries. The studio runs on the same habit: simple, elegant and efficient solutions to complex problems.</p>
+        <h1>About Studio Naarm</h1>
+        <p class="lead">Studio Naarm is a Melbourne studio founded by Pranav Gore. Pranav started as a developer in 2007 and grew into solution design and architecture on large transformation programmes, working with stakeholders from many vendors and countries. The studio runs on the same habit: simple, elegant and efficient solutions to complex problems.</p>
       </div>
     </section>
 

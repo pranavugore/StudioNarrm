@@ -37,7 +37,7 @@ const jsonld = [
   ld(breadcrumbs(origin, [["Home", "/"], ["Articles", ARTICLES_HREF], [title, articleHref(article)]])),
 ];
 ---
-<Base title={`${title} | Studio Narrm`} description={description} jsonld={jsonld} current="articles" ogType="article" updated={modified}>
+<Base title={`${title} | Studio Naarm`} description={description} jsonld={jsonld} current="articles" ogType="article" updated={modified}>
   <Fragment slot="head">
     <meta property="article:published_time" content={published} />
     <meta property="article:modified_time" content={modified} />
@@ -59,7 +59,7 @@ const jsonld = [
         {tags.length > 0 && <ul class="tags article-tags" aria-label="Topics">{tags.map((t) => <li>{t}</li>)}</ul>}
         <aside class="guide-cta">
           <h2>Want help with this?</h2>
-          <p>Studio Narrm designs and builds data dashboards, automation, AI agents and custom apps. Tell us what you're trying to do and we'll reply with a plan.</p>
+          <p>Studio Naarm designs and builds data dashboards, automation, AI agents and custom apps. Tell us what you're trying to do and we'll reply with a plan.</p>
           <a class="btn tone" href="/#contact">Start a project</a>
         </aside>
       </div>

@@ -1,7 +1,7 @@
 // Shared JSON-LD (schema.org) builders, so every page describes the site, studio and founder the same way.
 import { SITE, org } from "../data/site.js";
 
-// "https://studionarrm.com/" -> "https://studionarrm.com"
+// "https://studionaarm.com/" -> "https://studionaarm.com"
 export const originOf = (site) => site.href.replace(/\/$/, "");
 
 export function website(origin) {

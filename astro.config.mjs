@@ -10,7 +10,7 @@ import { readdirSync, readFileSync } from "node:fs";
 const hasArticles = readdirSync("./src/content/articles").some((f) => f.endsWith(".md") && !/^draft:\s*true\b/m.test(readFileSync(`./src/content/articles/${f}`, "utf8")));
 
 // Override with SITE_URL (e.g. a *.pages.dev preview URL) if you need to.
-const site = process.env.SITE_URL || "https://studionarrm.com";
+const site = process.env.SITE_URL || "https://studionaarm.com";
 
 export default defineConfig({
   site,

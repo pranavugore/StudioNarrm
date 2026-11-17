@@ -2,10 +2,10 @@ import { SERVICES } from "./services.js";
 import { SHOW_GP } from "./flags.js";
 
 export const SITE = {
-  brand: "Studio Narrm",
-  domain: "studionarrm.com",
+  brand: "Studio Naarm",
+  domain: "studionaarm.com",
   brandDescription:
-    "Studio Narrm is a Melbourne studio that designs and builds data dashboards, workflow automation, AI agents, custom apps and websites, founded by solution architect Pranav Gore.",
+    "Studio Naarm is a Melbourne studio that designs and builds data dashboards, workflow automation, AI agents, custom apps and websites, founded by solution architect Pranav Gore.",
   name: "Pranav Gore",
   givenName: "Pranav",
   familyName: "Gore",
@@ -44,7 +44,7 @@ export function org(origin) {
     "@type": "ProfessionalService",
     "@id": origin + "/#org",
     name: SITE.brand,
-    alternateName: ["studionarrm", SITE.domain],
+    alternateName: ["studionaarm", SITE.domain, "Studio Narrm", "studionarrm.com"],
     url: origin + "/",
     logo: origin + "/logo.png",
     image: origin + "/og.png",

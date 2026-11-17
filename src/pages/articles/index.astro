@@ -5,13 +5,13 @@ import { getArticles, articleHref, isoDate, ARTICLES_HREF } from "../../lib/arti
 import { longDate } from "../../lib/format.js";
 const origin = originOf(Astro.site);
 const articles = await getArticles();
-const title = "Articles on data, automation and AI agents | Studio Narrm";
-const description = "Articles from Studio Narrm, a Melbourne studio: practical notes on data dashboards, workflow automation, AI agents, custom apps and getting a business ready for AI search.";
+const title = "Articles on data, automation and AI agents | Studio Naarm";
+const description = "Articles from Studio Naarm, a Melbourne studio: practical notes on data dashboards, workflow automation, AI agents, custom apps and getting a business ready for AI search.";
 const url = origin + ARTICLES_HREF;
 const jsonld = [ld({
   "@type": "CollectionPage",
   "@id": url + "#webpage",
-  name: "Studio Narrm articles",
+  name: "Studio Naarm articles",
   description,
   url,
   isPartOf: { "@id": origin + "/#website" },
@@ -31,7 +31,7 @@ const jsonld = [ld({
       <div class="wrap">
         <span class="eyebrow">Articles</span>
         <h1>Articles</h1>
-        <p class="lead">Practical notes from Studio Narrm on data dashboards, workflow automation, AI agents and custom apps, written for small businesses, clinics and teams.</p>
+        <p class="lead">Practical notes from Studio Naarm on data dashboards, workflow automation, AI agents and custom apps, written for small businesses, clinics and teams.</p>
       </div>
     </section>
 

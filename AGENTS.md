@@ -1,6 +1,6 @@
 # Guide for AI agents and writing tools
 
-This is the Astro source for studionarrm.com. Read this before adding or changing pages.
+This is the Astro source for studionaarm.com. Read this before adding or changing pages.
 
 ## Articles
 
@@ -29,6 +29,6 @@ Design tokens are CSS custom properties on `:root` in `global.css` (for example 
 
 ## Writing
 
-- Write "Studio Narrm" in text; "studionarrm" only for the domain.
+- Write "Studio Naarm" in text; "studionaarm" only for the domain (studionaarm.com). The old spelling, Studio Narrm / studionarrm.com, redirects here; do not use it in copy.
 - Use the "we" voice for the studio.
 - Australian English.

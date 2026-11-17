@@ -7,7 +7,7 @@ import { money, numberWord } from "../lib/format.js";
 export const GP = {
   href: "/gp-clinics/",
   guideHref: "/gp-clinics/rule-21-guide/",
-  pdf: "/gp-clinics/studio-narrm-gp-clinic-offer.pdf",
+  pdf: "/gp-clinics/studio-naarm-gp-clinic-offer.pdf",
   checkSubject: "Free Rule 21 check",
   regions: ["Gippsland", "Western Victoria", "the Murray region", "the rest of regional and rural Victoria"],
   reviewed: "2026-10-27",
