@@ -4,6 +4,7 @@ import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import { SITE } from "../data/site.js";
 import { originOf, website, org, person } from "../lib/schema.js";
+import { isoDateTime } from "../lib/format.js";
 
 const { title, description, ogType = "website", jsonld = [], current = "", includeBase = true, updated = SITE.updated } = Astro.props;
 const origin = originOf(Astro.site);
@@ -24,8 +25,8 @@ const base = { "@context": "https://schema.org", "@graph": [website(origin), org
 const PAGE_TYPES = ["WebPage", "ProfilePage", "AboutPage", "CollectionPage", "FAQPage", "ContactPage"];
 const nodes = [...jsonld, ...(includeBase ? [base] : [])].flatMap((o) => o["@graph"] || [o]);
 const pageNode = nodes.find((n) => PAGE_TYPES.includes(n["@type"]) && n["@type"] !== "FAQPage");
-if (pageNode) pageNode.dateModified = updated;
-else if (includeBase && !notFound) base["@graph"].push({ "@type": "WebPage", "@id": canonical + "#webpage", url: canonical, name: title, description, isPartOf: { "@id": origin + "/#website" }, about: { "@id": origin + "/#org" }, inLanguage: "en-AU", dateModified: updated });
+if (pageNode) pageNode.dateModified = isoDateTime(updated);
+else if (includeBase && !notFound) base["@graph"].push({ "@type": "WebPage", "@id": canonical + "#webpage", url: canonical, name: title, description, isPartOf: { "@id": origin + "/#website" }, about: { "@id": origin + "/#org" }, inLanguage: "en-AU", dateModified: isoDateTime(updated) });
 ---
 <!doctype html>
 <html lang="en-AU">

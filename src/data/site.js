@@ -17,6 +17,8 @@ export const SITE = {
   country: "AU",
   description:
     "Solution Designer and Architect with 19 years of experience building enterprise applications, integrations, data analytics solutions and workflow automation.",
+  // When the site first went up (ProfilePage dateCreated) and when it last changed (dateModified, footer).
+  created: "2026-10-16",
   updated: "2026-10-27",
   // Google Tag Manager container. Analytics (and later Meta Pixel) tags are managed inside GTM. Set to "" to turn tracking off.
   gtmId: "GTM-KTJBT87D",
