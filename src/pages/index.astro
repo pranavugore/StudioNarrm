@@ -5,7 +5,7 @@ import ServiceArt from "../components/ServiceArt.astro";
 import { SERVICES, isShown } from "../data/services.js";
 import { SITE, FOUNDER_PROFILE } from "../data/site.js";
 import { originOf, website, org, person, ld } from "../lib/schema.js";
-import { numberWord, capitalise } from "../lib/format.js";
+import { numberWord, capitalise, isoDateTime } from "../lib/format.js";
 import { FAQ, faqJsonLd } from "../data/faq.js";
 import { SHOW_GP } from "../data/flags.js";
 const origin = originOf(Astro.site);
@@ -19,8 +19,17 @@ const jsonld = [
     "@graph": [
       website(origin),
       org(origin),
-      { "@type": "ProfilePage", "@id": `${origin}/#profile`, url: `${origin}/`, isPartOf: { "@id": `${origin}/#website` }, mainEntity: { "@id": `${origin}/#person` } },
-      person(origin, FOUNDER_PROFILE),
+      // Google's ProfilePage check wants the Person written out inside mainEntity (with its name), not only an @id link,
+      // so the founder node lives here. Other nodes still point at it by "#person".
+      {
+        "@type": "ProfilePage",
+        "@id": `${origin}/#profile`,
+        url: `${origin}/`,
+        name: title,
+        isPartOf: { "@id": `${origin}/#website` },
+        dateCreated: isoDateTime(SITE.created),
+        mainEntity: person(origin, FOUNDER_PROFILE),
+      },
       faqJsonLd(origin),
     ],
   }),
