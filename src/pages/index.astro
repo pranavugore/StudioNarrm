@@ -3,7 +3,8 @@ import Base from "../layouts/Base.astro";
 import ServicePanel from "../components/ServicePanel.astro";
 import ServiceArt from "../components/ServiceArt.astro";
 import { SERVICES, isShown } from "../data/services.js";
-import { SITE, FOUNDER_PROFILE } from "../data/site.js";
+import { SITE, FOUNDER_PROFILE, bookHref } from "../data/site.js";
+import { CHECK, FROM_PRICE } from "../data/automation.js";
 import { originOf, website, org, person, ld } from "../lib/schema.js";
 import { numberWord, capitalise, isoDateTime } from "../lib/format.js";
 import { FAQ, faqJsonLd } from "../data/faq.js";
@@ -67,8 +68,8 @@ const MARQUEE = ["Xero", "MYOB", "HubSpot", "Pipedrive", "Google Workspace", "Mi
           <h1 id="hero-h"><span class="kicker">Business automation for small businesses</span> <span class="line">Messy process in.</span> <span class="line"><span class="hl">Working system</span> out.</span></h1>
           <p class="lead">Studio Naarm is a Melbourne studio that automates the admin eating your week: <strong>quotes, invoices, CRM updates, reports and email</strong>, using <strong>n8n and AI agents</strong> that connect the tools you already use.</p>
           <div class="cta">
-            <a class="btn" href="#contact">Tell us about your problem</a>
-            <a class="btn ghost" href="#services">See the work</a>
+            <a class="btn" href={bookHref()}>{CHECK.short}</a>
+            <a class="btn ghost" href="/automation/#pricing">See prices, from {FROM_PRICE}</a>
           </div>
         </div>
         <div class="slider" aria-roledescription="carousel" aria-label={NUM + (SHOW_GP ? " services and our GP clinic offer" : " services")}>
@@ -185,6 +186,8 @@ const MARQUEE = ["Xero", "MYOB", "HubSpot", "Pipedrive", "Google Workspace", "Mi
         <div>
           <h2 id="contact-h">Ready to fix something? Tell us about it.</h2>
           <p>A project, or a process that's driving your team mad. We're in Melbourne and happy to work remotely.</p>
+          {SITE.bookingUrl && <p><a class="btn" href={SITE.bookingUrl}>{CHECK.short}</a></p>}
+          {SITE.phone && <p>Or call <a href={"tel:" + SITE.phone}>{SITE.phoneDisplay}</a>, 9 am to 8 pm Melbourne time.</p>}
         </div>
         <form id="contact-form" data-email={SITE.email} novalidate>
           <label for="f-name">Your name<input id="f-name" name="name" autocomplete="name" required></label>

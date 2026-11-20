@@ -48,6 +48,26 @@ The brand is now Studio Naarm and the primary address is `https://studionaarm.co
 5. Repeat the AI crawler checks below for studionaarm.com, add it as a new property in Google Search Console (use **Change of address** from the old one) and submit `https://studionaarm.com/sitemap-index.xml`.
 6. In GA4, update the web data stream URL to studionaarm.com. GTM needs no change.
 
+## Bookings and phone
+
+`SITE.bookingUrl` in `src/data/site.js` is the link behind every "Book a free automation check" button (header, home hero, Automation page). While it is `""`, those buttons go to the contact form on the home page. `SITE.phone` (international format, such as `+61400000000`) and `SITE.phoneDisplay` (such as `0400 000 000`) show a tap-to-call link in the header, the contact section and the Automation page, and add `telephone` to the structured data. Leave them `""` to hide the phone everywhere.
+
+Prices for the automation offer live only in `src/data/automation.js`.
+
+### Setting up the Google Calendar booking page
+
+1. Open calendar.google.com, click **Create → Appointment schedule**.
+2. Title: **Free 30-minute automation check**. Appointment duration: **30 minutes**.
+3. **General availability:** Weekly repeating, 9:00 am to 8:00 pm on the days you want. Check the time zone at the top says Melbourne (AEDT).
+4. **Adjusted availability:** add the dates you are away (for example 25 to 29 November 2026) and mark each one **Unavailable**.
+5. **Scheduling window:** 1 to 60 days in advance, minimum notice 12 hours. **Booked appointment settings:** 15-minute buffer, maximum 4 bookings a day.
+6. **Calendars checked for availability:** turn on your main calendar, so anything already in it blocks that time.
+7. **Location and conferencing:** Google Meet video conferencing.
+8. **Booking form:** keep first name, last name and email; add **Phone (optional)**, **Business name**, and **Which job takes up the most time?** Turn on email verification and reminders.
+9. **Save**, then **Share → Booking page → Copy link** (it looks like `https://calendar.app.google/…`) and paste it into `SITE.bookingUrl`.
+
+Tip: an all-day "Away" event in your calendar is marked **Free** by default, so it does not block bookings. Set it to **Busy**, or rely on step 4.
+
 ## Conversion tracking (GTM events)
 
 The site pushes these events to the GTM data layer (only when `SITE.gtmId` is set):

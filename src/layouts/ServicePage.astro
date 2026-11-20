@@ -2,9 +2,10 @@
 import Base from "./Base.astro";
 import ServiceArt from "../components/ServiceArt.astro";
 import { SERVICES } from "../data/services.js";
-import { SITE } from "../data/site.js";
+import { SITE, bookHref } from "../data/site.js";
+import { AUTO_PLANS, FOUNDING, CHECK } from "../data/automation.js";
 import { originOf, breadcrumbs, ld } from "../lib/schema.js";
-import { two } from "../lib/format.js";
+import { two, money } from "../lib/format.js";
 const { slug } = Astro.props;
 const s = SERVICES.find((x) => x.slug === slug);
 const plain = (h) => h.replace(/<[^>]+>/g, "");
@@ -23,6 +24,13 @@ const jsonld = [
     provider: { "@id": origin + "/#org" },
     areaServed: [{ "@type": "City", name: "Melbourne" }, { "@type": "State", name: "Victoria" }, { "@type": "Country", name: "Australia" }],
     hasOfferCatalog: { "@type": "OfferCatalog", name: s.eyebrow, itemListElement: s.page.offer.map(([n, d]) => ({ "@type": "Offer", itemOffered: { "@type": "Service", name: n, description: d } })) },
+    ...(s.pricing ? { offers: [
+      { "@type": "Offer", name: CHECK.name, price: 0, priceCurrency: "AUD", description: CHECK.text, ...(SITE.bookingUrl ? { url: SITE.bookingUrl } : {}) },
+      ...AUTO_PLANS.map((p) => ({
+        "@type": "Offer", name: p.name, description: p.note, price: p.price, priceCurrency: "AUD", url: url + "#pricing",
+        priceSpecification: { "@type": p.from ? "PriceSpecification" : "UnitPriceSpecification", ...(p.from ? { minPrice: p.price } : { price: p.price }), priceCurrency: "AUD", valueAddedTaxIncluded: false, ...(p.monthly ? { unitText: "month" } : {}) },
+      })),
+    ] } : {}),
   },
   ld(breadcrumbs(origin, [["Home", "/"], [s.eyebrow, s.href]])),
 ];
@@ -45,7 +53,7 @@ const steps = [
           <h1 class={s.page.h1 ? "svc-h1" : "caps"} set:html={s.page.h1 || s.title} />
           {s.page.answer && <p class="lead answer">{s.page.answer}</p>}
           <p class={s.page.answer ? "" : "lead"}>{s.page.lead}</p>
-          <div class="cta"><a class="btn tone" href="/#contact">Start a conversation</a><a class="btn ghost" href="#what">What we can do</a></div>
+          <div class="cta">{s.pricing ? <><a class="btn tone" href={bookHref()}>{CHECK.short}</a><a class="btn ghost" href="#pricing">See prices</a></> : <><a class="btn tone" href="/#contact">Start a conversation</a><a class="btn ghost" href="#what">What we can do</a></>}</div>
         </div>
         <ServiceArt name={s.art} />
       </div>
@@ -80,6 +88,35 @@ const steps = [
       </section>
     )}
 
+    {s.pricing && (
+      <section class="section" id="pricing" aria-labelledby="price-h">
+        <div class="wrap">
+          <div class="section-head"><div><span class="eyebrow">Pricing</span><h2 id="price-h">Fixed prices, agreed before we start</h2></div><p>All prices exclude GST. Start with one job; add more when it's paying for itself.</p></div>
+          <aside class="founding">
+            <span class="badge">Free</span>
+            <p><b>{CHECK.name}.</b> {CHECK.text}</p>
+            <a class="btn tone small" href={bookHref()}>{CHECK.short}</a>
+          </aside>
+          <div class="plans three">
+            {AUTO_PLANS.map((p, k) => (
+              <article class={"plan" + (k === 0 ? " main" : "")}>
+                {k === 0 && <span class="badge">Start here</span>}
+                <h3>{p.name}</h3>
+                <p class="price">{p.from && <span>from </span>}<b>{money(p.price)}</b> <span>+ GST {p.unit}</span></p>
+                <ul>{p.items.map((it) => <li>{it}</li>)}</ul>
+                <p class="note">{p.note}</p>
+              </article>
+            ))}
+          </div>
+          <aside class="founding">
+            <span class="badge">Founding clients</span>
+            <p><b>The first {FOUNDING.places} businesses get the {AUTO_PLANS[0].name} for {money(AUTO_PLANS[0].founding)} + GST</b>, in return for a short review and a case study we can share once it's running.</p>
+            <a class="btn tone small" href={bookHref()}>Ask about a founding place</a>
+          </aside>
+        </div>
+      </section>
+    )}
+
     <section class="section" aria-labelledby="how-h">
       <div class="wrap">
         <div class="section-head"><div><span class="eyebrow">How it works</span><h2 id="how-h">Simple, visible, no surprises</h2></div></div>
@@ -102,7 +139,7 @@ const steps = [
       <div class="wrap">
         <h2>Have something in mind?</h2>
         <p>Tell us what you're trying to do. We'll reply with a straight answer on whether we can help and what it would take.</p>
-        <a class="btn" href={"mailto:" + SITE.email + "?subject=" + encodeURIComponent(s.eyebrow)}>Email us</a>
+        <div class="cta">{s.pricing && <a class="btn" href={bookHref()}>{CHECK.short}</a>}<a class={s.pricing ? "btn ghost" : "btn"} href={"mailto:" + SITE.email + "?subject=" + encodeURIComponent(s.eyebrow)}>Email us</a>{SITE.phone && <a class="btn ghost" href={"tel:" + SITE.phone}>Call {SITE.phoneDisplay}</a>}</div>
       </div>
     </section>
   </main>

@@ -22,7 +22,17 @@ export const SITE = {
   updated: "2026-11-20",
   // Google Tag Manager container. Analytics (and later Meta Pixel) tags are managed inside GTM. Set to "" to turn tracking off.
   gtmId: "GTM-KTJBT87D",
+  // Booking page for the free check (Google Calendar appointment schedule, see README "Bookings").
+  // "" sends every booking button to the contact form instead.
+  bookingUrl: "https://calendar.app.google/oTowLFvD5pVXS4e89",
+  // Phone in international format for tel: links and structured data, plus how it is shown. "" hides it everywhere.
+  phone: "+61452355575",
+  phoneDisplay: "0452 355 575",
 };
+
+// Where a "book" button goes: the booking page when set, otherwise the home contact form.
+export const bookHref = () => SITE.bookingUrl || "/#contact";
+export const isExternalBooking = () => Boolean(SITE.bookingUrl);
 
 // Topics the studio works in, for knowsAbout. Keep to capabilities, not clients.
 export const KNOWS_ABOUT = [
@@ -52,6 +62,8 @@ export function org(origin) {
     image: origin + "/og.png",
     description: SITE.brandDescription,
     email: "mailto:" + SITE.email,
+    ...(SITE.phone ? { telephone: SITE.phone } : {}),
+    priceRange: "$$",
     founder: { "@id": origin + "/#person" },
     address: { "@type": "PostalAddress", addressLocality: SITE.city, addressRegion: SITE.region, addressCountry: SITE.country },
     areaServed: [
@@ -64,7 +76,8 @@ export function org(origin) {
       "@type": "ContactPoint",
       contactType: "sales",
       email: SITE.email,
-      url: origin + "/#contact",
+      ...(SITE.phone ? { telephone: SITE.phone } : {}),
+      url: SITE.bookingUrl || origin + "/#contact",
       areaServed: "AU",
       availableLanguage: ["en-AU"],
     },
@@ -83,5 +96,6 @@ export function org(origin) {
       ],
     },
     sameAs: [SITE.linkedin],
+    ...(SITE.bookingUrl ? { potentialAction: { "@type": "ReserveAction", name: "Book a free 30-minute automation check", target: { "@type": "EntryPoint", urlTemplate: SITE.bookingUrl, actionPlatform: ["https://schema.org/DesktopWebPlatform", "https://schema.org/MobileWebPlatform"] } } } : {}),
   };
 }
