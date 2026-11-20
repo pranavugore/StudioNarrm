@@ -7,9 +7,15 @@ import { longDate } from "../lib/format.js";
 import { getArticles, ARTICLES_HREF } from "../lib/articles.js";
 const hasArticles = (await getArticles()).length > 0;
 const { updated: iso = SITE.updated } = Astro.props;
+// The home page ends with its own contact section, so it skips the statement block.
+const showStatement = Astro.url.pathname !== "/";
 ---
 <footer class="site-footer">
   <div class="wrap">
+    {showStatement && <div class="statement">
+      <p class="say">Tell us what's eating your week.</p>
+      <div class="statement-cta"><a class="btn" href={SITE.bookingUrl || "/#contact"}>Book a free automation check</a>{SITE.phone && <a class="btn ghost" href={"tel:" + SITE.phone}>{SITE.phoneDisplay}</a>}<span class="clock mono" data-clock>Melbourne</span></div>
+    </div>}
     <div class="foot">
       <div>
         <a class="brand" href="/" aria-label={SITE.brand + " home"}><Logo id="logo-f" /></a>
@@ -18,6 +24,8 @@ const { updated: iso = SITE.updated } = Astro.props;
       <div><h4>Services</h4><ul>{SERVICES.map((sv) => <li><a href={sv.href}>{sv.eyebrow}</a></li>)}</ul></div>
       <div><h4>More</h4><ul>{SHOW_GP && <li><a href="/gp-clinics/">GP clinics</a></li>}{SHOW_GP && <li><a href="/gp-clinics/rule-21-guide/">Rule 21 guide</a></li>}<li><a href="/work/">Case studies</a></li>{hasArticles && <li><a href={ARTICLES_HREF}>Articles</a></li>}<li><a href="/about/">About</a></li><li><a href="/privacy/">Privacy</a></li><li><a href={SITE.linkedin} rel="me">LinkedIn</a></li></ul></div>
     </div>
+    <p class="bigword" aria-hidden="true">Studio Naarm</p>
     <div class="legal"><span>© {iso.slice(0, 4)} {SITE.brand}</span><span>Last updated <time datetime={iso}>{longDate(iso)}</time></span></div>
   </div>
 </footer>
+<script is:inline>(function(){var c=document.querySelector('[data-clock]');if(!c)return;function t(){c.textContent='Melbourne '+new Date().toLocaleTimeString('en-AU',{timeZone:'Australia/Melbourne',hour:'numeric',minute:'2-digit'});}t();setInterval(t,30000);})();</script>
