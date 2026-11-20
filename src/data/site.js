@@ -24,10 +24,10 @@ export const SITE = {
   gtmId: "GTM-KTJBT87D",
   // Booking page for the free check (Google Calendar appointment schedule, see README "Bookings").
   // "" sends every booking button to the contact form instead.
-  bookingUrl: "",
+  bookingUrl: "https://calendar.app.google/oTowLFvD5pVXS4e89",
   // Phone in international format for tel: links and structured data, plus how it is shown. "" hides it everywhere.
-  phone: "",
-  phoneDisplay: "",
+  phone: "+61452355575",
+  phoneDisplay: "0452 355 575",
 };
 
 // Where a "book" button goes: the booking page when set, otherwise the home contact form.
