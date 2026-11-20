@@ -10,8 +10,8 @@ import { FAQ, faqJsonLd } from "../data/faq.js";
 import { SHOW_GP } from "../data/flags.js";
 const origin = originOf(Astro.site);
 const NUM = capitalise(numberWord(SERVICES.length));
-const title = "Studio Naarm | Data, Automation & AI Agents, Melbourne";
-const description = "Studio Naarm is a Melbourne studio for data dashboards, n8n workflow automation, AI agents, custom apps and websites, founded by Pranav Gore, a solution architect with 19 years in banking, telecom and non-profits.";
+const title = "Business Automation for Small Businesses in Melbourne | Studio Naarm";
+const description = "We automate the admin that eats your week: quotes, invoices, CRM updates, reports and email, with n8n and AI agents. Fixed-price projects for Melbourne and Australian small businesses.";
 // The home page carries the full graph (with the founder's credentials and skills) instead of Base's,
 // so it sets includeBase={false}. Base stamps dateModified on the ProfilePage node.
 const jsonld = [
@@ -55,7 +55,8 @@ const ICONS = {
   "video-ads": '<rect x="8" y="12" width="36" height="28" rx="6" class="s-tone"/><path d="M22 19 L32 26 L22 33 Z" fill="var(--bg)"/>',
   "marketing-outreach": '<path d="M10 22 H18 L36 12 V40 L18 30 H10 Z" class="s-tone"/><path d="M40 20 Q45 26 40 32" class="s-stroke-tone" stroke-width="3" fill="none" stroke-linecap="round"/>',
 };
-const MARQUEE = ["Banking", "Telecommunications", "Telstra", "Retail", "Non-profit", "n8n", "AWS", "Claude", "Google AppSheet", "PostgreSQL", "Kafka", "Spring Boot", "Oracle OSM", "Looker Studio", "Docker"];
+// Everyday small-business tools we connect with n8n (a built-in node or the tool's API).
+const MARQUEE = ["Xero", "MYOB", "HubSpot", "Pipedrive", "Google Workspace", "Microsoft 365", "Shopify", "ServiceM8", "Calendly", "Slack", "Gmail", "Outlook", "Airtable", "Google Sheets", "Claude"];
 ---
 <Base title={title} description={description} jsonld={jsonld} current="home" includeBase={false}>
 <main>
@@ -63,10 +64,8 @@ const MARQUEE = ["Banking", "Telecommunications", "Telstra", "Retail", "Non-prof
       <canvas class="net" data-particle-network aria-hidden="true"></canvas>
       <div class="wrap">
         <div>
-          <span class="eyebrow">Systems, Data &amp; Automation</span>
-          <p class="kicker">Calmly fixing chaos since 2007…</p>
-          <h1 id="hero-h"><span class="line">Messy process in.</span> <span class="line"><span class="hl">Working system</span> out.</span></h1>
-          <p class="lead">Studio Naarm is a Melbourne studio that designs <strong>and</strong> builds: <strong>n8n automations and AI agents</strong>, <strong>dashboards</strong>, <strong>apps</strong>, and <strong>custom websites</strong>.</p>
+          <h1 id="hero-h"><span class="kicker">Business automation for small businesses</span> <span class="line">Messy process in.</span> <span class="line"><span class="hl">Working system</span> out.</span></h1>
+          <p class="lead">Studio Naarm is a Melbourne studio that automates the admin eating your week: <strong>quotes, invoices, CRM updates, reports and email</strong>, using <strong>n8n and AI agents</strong> that connect the tools you already use.</p>
           <div class="cta">
             <a class="btn" href="#contact">Tell us about your problem</a>
             <a class="btn ghost" href="#services">See the work</a>
@@ -99,12 +98,12 @@ const MARQUEE = ["Banking", "Telecommunications", "Telstra", "Retail", "Non-prof
     <section class="intro" aria-labelledby="intro-h">
       <div class="wrap">
         <div>
-          <span class="eyebrow">Welcome</span>
-          <h2 id="intro-h">Architecture first. Then we build the thing.</h2>
+          <span class="eyebrow">Why us</span>
+          <h2 id="intro-h">Built properly, so it keeps working when you're busy.</h2>
         </div>
         <div>
-          <p>Pranav has spent <strong>19 years</strong> designing systems that big organisations depend on: <strong>core banking integration</strong>, <strong>telecom order fulfilment</strong>, and a fleet of <strong>100+ automation robots</strong> at Telstra.</p>
-          <p>At Studio Naarm we build the whole thing, fast, with <strong>AI-assisted development</strong>. Data pipelines, AI agents, dashboards, mobile apps and full platforms. Different problems, same habit: understand it properly, keep it simple, ship it.</p>
+          <p>Your automations are designed by a solution architect with <strong>19 years</strong> of building systems that banks and telcos depend on, including running a fleet of <strong>100+ automation robots</strong>. You get that care at small-business scale: <strong>a fixed price agreed before we start</strong>, workflows you own, documentation, and alerts if anything needs a human.</p>
+          <p>We start with the job that wastes the most time, get it working within weeks, and build from there. When it helps, we add a dashboard, an AI agent or a small app on top.</p>
           <ul class="thumbs" aria-label="Jump to a service" style={`--cols:${SERVICES.length};--cols-sm:${SERVICES.length > 4 ? 3 : SERVICES.length}`}>
             {SERVICES.map((sv) => <li><a class={sv.tone} href={"#" + sv.slug} title={sv.eyebrow}><svg viewBox="0 0 52 52" aria-hidden="true" focusable="false" set:html={ICONS[sv.slug]} /><span class="sr">{sv.eyebrow}</span></a></li>)}
           </ul>
@@ -142,8 +141,8 @@ const MARQUEE = ["Banking", "Telecommunications", "Telstra", "Retail", "Non-prof
 
     <section class="served" aria-labelledby="served-h">
       <div class="wrap">
-        <span class="eyebrow">Happily served</span>
-        <h2 id="served-h">Industries, teams &amp; tools</h2>
+        <span class="eyebrow">Works with your tools</span>
+        <h2 id="served-h">Connects the apps you already use</h2>
       </div>
       <div class="marquee">
         <ul>{MARQUEE.map((t) => <li>{t}</li>)}</ul>
@@ -257,6 +256,7 @@ const MARQUEE = ["Banking", "Telecommunications", "Telstra", "Retail", "Non-prof
       var needs = [].slice.call(form.querySelectorAll('input[name=need]:checked')).map(function (c) { return c.value; }).join(', ');
       var clinic = [['Practice software', form.software], ['Staff', form.staff], ['Town', form.town]].map(function (p) { return [p[0], p[1] ? p[1].value : '']; }).filter(function (p) { return p[1]; }).map(function (p) { return p[0] + ': ' + p[1]; }).join('\n');
       var body = form.message.value + '\n\n' + (needs ? 'Looking for: ' + needs + '\n' : '') + (clinic ? clinic + '\n' : '') + 'From: ' + form.name.value + ' <' + form.email.value + '>';
+      (window.dataLayer = window.dataLayer || []).push({ event: 'generate_lead', form_name: 'home_contact', lead_needs: needs });
       window.location.href = 'mailto:' + form.dataset.email + '?subject=' + encodeURIComponent('Enquiry from ' + form.name.value) + '&body=' + encodeURIComponent(body);
       note.textContent = 'Your email app should open with the message ready to send. If nothing opens, set up an email app on this device and try again.';
     });

@@ -24,7 +24,8 @@ Last updated: ${SITE.updated}. Every page below is linked as Markdown; drop "ind
 
 ## Who we work with
 
-- Small businesses, teams and non-profits that want to stop doing repetitive work by hand and see their numbers clearly.
+- Small and medium businesses in Melbourne, Victoria and across Australia that want to stop doing repetitive admin by hand: workflow automation with n8n and AI agents that connects the tools they already use (Xero, MYOB, HubSpot, Google Workspace, Microsoft 365, Shopify and more), at a fixed price agreed before work starts.
+- Teams and non-profits that want to see their numbers clearly.
 - Larger organisations that need solution architecture and design for integration, data and automation.
 ${SHOW_GP ? `- General practices in Victoria, especially regional and rural clinics: putting the My Health Record Security and Access Policy (Rule 21) in place, and replacing fax and email referrals with secure messaging inside their existing practice software. ${gpPrices} Details: [GP clinics](${md(GP.href)}).
 ` : ""}
@@ -39,7 +40,7 @@ Based in Melbourne, Victoria, Australia. Works across Australia, remotely or in 
 
 To start: email ${SITE.email} with a line on what you're trying to do, or use the form at ${origin}/#contact. LinkedIn: ${SITE.linkedin}
 
-Recent and current work: an operational analytics web app, n8n data pipelines and AI agents, Google AppSheet apps, migrating 100+ RPA robots in-house at Telstra, and two products in progress: the Stolen Minutes app and a platform for yoga teachers.
+Recent and current work: an operational analytics web app, n8n data pipelines and AI agents, Google AppSheet apps, moving a fleet of 100+ RPA robots in-house at a national telco, and the Stolen Minutes app (in progress).
 
 ## Services
 ${services}

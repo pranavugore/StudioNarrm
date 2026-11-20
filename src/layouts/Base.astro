@@ -72,5 +72,6 @@ else if (includeBase && !notFound) base["@graph"].push({ "@type": "WebPage", "@i
     <slot />
     <Footer updated={updated} />
     <slot name="scripts" />
+    {gtmId && <script is:inline set:html={`(function(){var dl=window.dataLayer=window.dataLayer||[];document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href]');if(!a)return;var h=a.getAttribute('href')||'';var where=(a.closest('main section, header, footer')||{}).id||'';if(h.indexOf('mailto:')===0)dl.push({event:'contact_email_click',link_text:(a.textContent||'').trim().slice(0,80),page_section:where});else if(h.indexOf('tel:')===0)dl.push({event:'contact_phone_click',page_section:where});else if(/\\.pdf$/i.test(h))dl.push({event:'offer_pdf_download',file_name:h.split('/').pop()});},true);})();`} />}
   </body>
 </html>
