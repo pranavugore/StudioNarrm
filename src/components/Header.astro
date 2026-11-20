@@ -1,5 +1,5 @@
 ---
-import { SITE } from "../data/site.js";
+import { SITE, bookHref } from "../data/site.js";
 import Logo from "./Logo.astro";
 import { SERVICES } from "../data/services.js";
 import { SHOW_GP } from "../data/flags.js";
@@ -21,7 +21,8 @@ const links = [
     <a class="brand" href="/" aria-label={SITE.brand + " home"}><Logo id="logo-h" /></a>
     <nav aria-label="Main">
       {links.map((l) => <a href={l.href} aria-current={current === l.key ? "page" : undefined}>{l.label}</a>)}
-      <a class="btn small" href="/#contact">Start a project</a>
+      {SITE.phone && <a class="tel" href={"tel:" + SITE.phone}>{SITE.phoneDisplay}</a>}
+      <a class="btn small" href={bookHref()}>Book a free check</a>
     </nav>
   </div>
 </header>

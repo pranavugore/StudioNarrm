@@ -481,3 +481,5 @@ form.quiz { background: none; border: 0; padding: 0; display: block; }
 /* Service page H1 written as a sentence (page.h1 in services.js): sentence case, a step smaller than the caps titles. */
 .svc-hero h1.svc-h1 { font-size: clamp(2.2rem, 4.6vw, 3.6rem); line-height: 1.05; margin-bottom: 1.2rem; }
 .svc-hero .answer + p { margin-top: 1rem; }
+/* Automation pricing: the free-check panel sits above the plans, the founding note below. */
+#pricing .founding + .plans, #pricing .plans + .founding { margin-top: 1.5rem; }

@@ -13,6 +13,7 @@ export const ALL_SERVICES = [
     tone: "t-rpa",
     art: "flow",
     eyebrow: "Automation",
+    pricing: true, // shows the offer from src/data/automation.js on the page
     tags: "n8n · RPA · AI agents",
     blurb: "workflow automation (n8n), robotic process automation, system sync and scheduled reporting",
     kicker: "Same task, every day, by hand?",
