@@ -10,18 +10,18 @@ const s = SERVICES.find((x) => x.slug === slug);
 const plain = (h) => h.replace(/<[^>]+>/g, "");
 const origin = originOf(Astro.site);
 const url = origin + s.href;
-const title = `${s.eyebrow} | ${SITE.brand}, ${SITE.city}`;
-const description = s.summary;
+const title = s.seoTitle || `${s.eyebrow} | ${SITE.brand}, ${SITE.city}`;
+const description = s.metaDescription || s.summary;
 const jsonld = [
   {
     "@context": "https://schema.org",
     "@type": "Service",
     name: s.eyebrow,
     serviceType: s.eyebrow,
-    description: s.page.lead,
+    description: s.page.answer || s.page.lead,
     url,
     provider: { "@id": origin + "/#org" },
-    areaServed: [{ "@type": "Country", name: "Australia" }, "Remote worldwide"],
+    areaServed: [{ "@type": "City", name: "Melbourne" }, { "@type": "State", name: "Victoria" }, { "@type": "Country", name: "Australia" }],
     hasOfferCatalog: { "@type": "OfferCatalog", name: s.eyebrow, itemListElement: s.page.offer.map(([n, d]) => ({ "@type": "Offer", itemOffered: { "@type": "Service", name: n, description: d } })) },
   },
   ld(breadcrumbs(origin, [["Home", "/"], [s.eyebrow, s.href]])),
@@ -42,8 +42,9 @@ const steps = [
           <nav class="crumbs mono" aria-label="Breadcrumb"><a href="/">Home</a> / <a href="/#services">Services</a> / <span>{s.eyebrow}</span></nav>
           <p class="kicker">{s.kicker}</p>
           <span class="eyebrow">{s.eyebrow}</span>
-          <h1 class="caps" set:html={s.title} />
-          <p class="lead">{s.page.lead}</p>
+          <h1 class={s.page.h1 ? "svc-h1" : "caps"} set:html={s.page.h1 || s.title} />
+          {s.page.answer && <p class="lead answer">{s.page.answer}</p>}
+          <p class={s.page.answer ? "" : "lead"}>{s.page.lead}</p>
           <div class="cta"><a class="btn tone" href="/#contact">Start a conversation</a><a class="btn ghost" href="#what">What we can do</a></div>
         </div>
         <ServiceArt name={s.art} />

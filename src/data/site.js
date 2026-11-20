@@ -5,7 +5,7 @@ export const SITE = {
   brand: "Studio Naarm",
   domain: "studionaarm.com",
   brandDescription:
-    "Studio Naarm is a Melbourne studio that designs and builds data dashboards, workflow automation, AI agents, custom apps and websites, founded by solution architect Pranav Gore.",
+    "Studio Naarm is a Melbourne studio that builds workflow automation and AI agents for small and medium businesses, plus data dashboards, custom apps and websites. Founded by solution architect Pranav Gore.",
   name: "Pranav Gore",
   givenName: "Pranav",
   familyName: "Gore",
@@ -19,7 +19,7 @@ export const SITE = {
     "Solution Designer and Architect with 19 years of experience building enterprise applications, integrations, data analytics solutions and workflow automation.",
   // When the site first went up (ProfilePage dateCreated) and when it last changed (dateModified, footer).
   created: "2026-10-16",
-  updated: "2026-10-27",
+  updated: "2026-11-20",
   // Google Tag Manager container. Analytics (and later Meta Pixel) tags are managed inside GTM. Set to "" to turn tracking off.
   gtmId: "GTM-KTJBT87D",
 };

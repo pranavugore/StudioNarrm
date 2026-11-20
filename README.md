@@ -48,6 +48,24 @@ The brand is now Studio Naarm and the primary address is `https://studionaarm.co
 5. Repeat the AI crawler checks below for studionaarm.com, add it as a new property in Google Search Console (use **Change of address** from the old one) and submit `https://studionaarm.com/sitemap-index.xml`.
 6. In GA4, update the web data stream URL to studionaarm.com. GTM needs no change.
 
+## Conversion tracking (GTM events)
+
+The site pushes these events to the GTM data layer (only when `SITE.gtmId` is set):
+
+| Event | When |
+|---|---|
+| `generate_lead` | The home contact form is sent (`form_name`, `lead_needs`) |
+| `contact_email_click` | Any email link is clicked, such as "Email us" or "Book the free check" (`link_text`, `page_section`) |
+| `contact_phone_click` | Any phone link is clicked (once a number is on the site) |
+| `offer_pdf_download` | The GP offer PDF is downloaded (`file_name`) |
+
+To send them to GA4, in Google Tag Manager:
+
+1. **Triggers → New → Custom Event**, event name `generate_lead`. Repeat for the other three event names.
+2. **Tags → New → Google Analytics: GA4 Event**, measurement ID G-57Z56JQJXX, event name `{{Event}}`, firing on all four triggers. To keep the details, add event parameters (`form_name`, `lead_needs`, `link_text`, `page_section`, `file_name`) from Data Layer Variables of the same names.
+3. **Preview** on studionaarm.com, click an email link and check the event fires, then **Submit**.
+4. In **GA4 → Admin → Events**, once the events show up (up to 24 hours), mark `generate_lead`, `contact_email_click` and `contact_phone_click` as **key events**.
+
 ## How it deploys today
 
 The live site is a Cloudflare **Worker** (studionarrm) connected to this repo with Workers Builds. Every push to `main` runs `npm run build` then `npx wrangler deploy`, which serves `dist/` as static assets on studionaarm.com. There is no `wrangler.jsonc`; Wrangler works the settings out from the Astro project.

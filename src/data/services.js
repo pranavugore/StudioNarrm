@@ -8,23 +8,6 @@ import { SHOW_GP } from "./flags.js";
 
 export const ALL_SERVICES = [
   {
-    slug: "data-viz",
-    href: "/data-viz/",
-    tone: "t-data",
-    art: "data",
-    eyebrow: "Data analytics & visualisation",
-    tags: "Dashboards · Data stories",
-    blurb: "dashboards, data pipelines and interactive data stories, with live examples",
-    kicker: "Drowning in spreadsheets?",
-    title: "See your numbers <i>clearly</i>",
-    summary: "We pull your data out of forms, CRMs and spreadsheets into one clean model, then build the views people actually use: an everyday dashboard, or something more memorable when the story matters.",
-    feats: [
-      ["Dashboards", "Trends, comparisons and shares at a glance, refreshed automatically so nobody updates them by hand."],
-      ["Data pipelines", "Scheduled loads from your systems into a proper database, with checks that catch bad data early."],
-      ["Data stories", "Interactive charts for reports, funders and campaigns, built to explain rather than just display."],
-    ],
-  },
-  {
     slug: "automation",
     href: "/automation/",
     tone: "t-rpa",
@@ -40,7 +23,13 @@ export const ALL_SERVICES = [
       ["AI agents in the flow", "Claude-powered steps that research, draft and turn messy free text into clean records, with a human check."],
       ["RPA at scale", "Bots for systems without APIs. Our founder moved a fleet of 100+ telecom robots in-house without disruption."],
     ],
+    // Search-facing title, description and H1 for the service page (the home panel keeps `title`).
+    seoTitle: "Small Business Automation & n8n Workflows, Melbourne | Studio Naarm",
+    metaDescription: "Fixed-price workflow automation for Melbourne and Australian small businesses: n8n and AI agents that move enquiries, quotes, invoices, CRM records and reports between your tools.",
     page: {
+      h1: "Small business automation that runs while you work",
+      // Answer-first paragraph under the H1, for people skimming and for AI answer engines.
+      answer: "Studio Naarm builds workflow automation for small and medium businesses in Melbourne and across Australia. We use n8n and AI agents to connect the tools you already use, so enquiries, quotes, invoices, CRM records and reports move on their own. Most first automations are live within two weeks, at a fixed price agreed before we start.",
       lead: "If someone on your team does the same steps every day or every week, there is a good chance a workflow can do it for them. We design automations that are simple to understand, cheap to run and easy to hand over.",
       offer: [
         ["System-to-system sync", "Keep your CRM, accounting, forms and spreadsheets in step without anyone retyping data."],
@@ -55,11 +44,28 @@ export const ALL_SERVICES = [
       ],
       examples: [
         ["n8n automations and AI agents", "Self-hosted · In production", "A portfolio of 50+ n8n workflows: incremental data loads from APIs into PostgreSQL, bulk migrations into a CRM, scheduled reports and funnels, and AI agents that research and draft outreach. Every workflow alerts on failure and is backed up to Git."],
-        ["RPA at Telstra", "Enterprise · 100+ robots", "Took a fleet of more than 100 software robots from a vendor-run service to an in-house team, with no disruption to the business processes they support, then kept delivering new ones."],
+        ["RPA at a national telco", "Enterprise · 100+ robots", "Took a fleet of more than 100 software robots from a vendor-run service to an in-house team, with no disruption to the business processes they support, then kept delivering new ones."],
       ],
       second: "robots",
       secondCaption: "Moving a fleet of 100+ robots from a vendor to an in-house team, without disruption.",
     },
+  },
+  {
+    slug: "data-viz",
+    href: "/data-viz/",
+    tone: "t-data",
+    art: "data",
+    eyebrow: "Data analytics & visualisation",
+    tags: "Dashboards · Data stories",
+    blurb: "dashboards, data pipelines and interactive data stories, with live examples",
+    kicker: "Drowning in spreadsheets?",
+    title: "See your numbers <i>clearly</i>",
+    summary: "We pull your data out of forms, CRMs and spreadsheets into one clean model, then build the views people actually use: an everyday dashboard, or something more memorable when the story matters.",
+    feats: [
+      ["Dashboards", "Trends, comparisons and shares at a glance, refreshed automatically so nobody updates them by hand."],
+      ["Data pipelines", "Scheduled loads from your systems into a proper database, with checks that catch bad data early."],
+      ["Data stories", "Interactive charts for reports, funders and campaigns, built to explain rather than just display."],
+    ],
   },
   {
     slug: "agent-ready",
