@@ -16,7 +16,7 @@ export const SITE = {
   region: "VIC",
   country: "AU",
   description:
-    "Solution Designer and Architect with 19 years of experience building enterprise applications, integrations, data analytics solutions and workflow automation.",
+    "Solution Designer and Architect with two decades of experience building enterprise applications, integrations, data analytics solutions and workflow automation.",
   // When the site first went up (ProfilePage dateCreated) and when it last changed (dateModified, footer).
   created: "2026-10-16",
   updated: "2026-11-20",

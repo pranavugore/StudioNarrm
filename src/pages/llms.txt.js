@@ -19,7 +19,7 @@ export async function GET({ site }) {
   const services = SERVICES.map((sv) => `- [${sv.eyebrow}](${md(sv.href)}): ${sv.blurb}\n`).join("");
   return new Response(`# ${SITE.brand}
 
-> ${SITE.brand} (${origin}) is a Melbourne studio that designs and builds data dashboards, workflow automation, AI agents, custom apps and websites, and helps businesses get ready for AI search and AI agents. It was founded by ${SITE.name}, a Melbourne-based Solution Designer and Architect with 19 years of experience in enterprise integration, data analytics dashboards and AI agents and workflow automation (50+ production n8n workflows, ETL into PostgreSQL, LLM agents with Claude, RPA, low-code), across banking, telecommunications, retail and non-profit organisations. AWS Certified Solutions Architect – Associate.
+> ${SITE.brand} (${origin}) is a Melbourne studio that designs and builds data dashboards, workflow automation, AI agents, custom apps and websites, and helps businesses get ready for AI search and AI agents. It was founded by ${SITE.name}, a Melbourne-based Solution Designer and Architect with two decades of experience in enterprise integration, data analytics dashboards and AI agents and workflow automation (50+ production n8n workflows, ETL into PostgreSQL, LLM agents with Claude, RPA, low-code), across banking, telecommunications, retail and non-profit organisations. AWS Certified Solutions Architect – Associate.
 
 Last updated: ${SITE.updated}. Every page below is linked as Markdown; drop "index.md" for the HTML page.
 
