@@ -26,8 +26,8 @@ export const SITE = {
   // "" sends every booking button to the contact form instead.
   bookingUrl: "https://calendar.app.google/oTowLFvD5pVXS4e89",
   // Phone in international format for tel: links and structured data, plus how it is shown. "" hides it everywhere.
-  phone: "+61452355575",
-  phoneDisplay: "0452 355 575",
+  phone: "",
+  phoneDisplay: "",
 };
 
 // Where a "book" button goes: the booking page when set, otherwise the home contact form.
