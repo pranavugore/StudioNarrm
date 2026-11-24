@@ -100,11 +100,14 @@ const MARQUEE = ["Xero", "MYOB", "HubSpot", "Pipedrive", "Google Workspace", "Mi
       <div class="wrap">
         <div>
           <span class="eyebrow">Why us</span>
-          <h2 id="intro-h">Built properly, so it keeps working when you're busy.</h2>
+          <h2 id="intro-h">Enterprise-grade systems, at small-business speed.</h2>
         </div>
         <div>
-          <p>Your automations are designed by a solution architect with <strong>19 years</strong> of building systems that banks and telcos depend on, including running a fleet of <strong>100+ automation robots</strong>. You get that care at small-business scale: <strong>a fixed price agreed before we start</strong>, workflows you own, documentation, and alerts if anything needs a human.</p>
-          <p>We start with the job that wastes the most time, get it working within weeks, and build from there. When it helps, we add a dashboard, an AI agent or a small app on top.</p>
+          <p>The automations, connected data and AI insights that used to be reserved for big corporations can now be built for your business. Work that once took a large team months to get done can now be <strong>up and running in days</strong>. And because a smaller business can move faster than any corporation, you learn from what you find and adjust sooner.</p>
+          <p>Bring us the bottlenecks you're facing right now. We work with you to build systems that free up your time for the work you care about and the work that moves the needle. We bring your data together from every source and analyse it with AI, so you can <strong>cut what isn't working and double down on what is</strong>. Your own data may surprise you.</p>
+          <p>Replacing old systems used to be a project measured in years. With today's tools we can modernise them in <strong>weeks, and sometimes days</strong>.</p>
+          <p>We have <strong>decades of experience</strong> building systems that banks and telcos depend on.</p>
+          <p><a class="btn" href={bookHref()}>Book a call and see what's possible</a></p>
           <ul class="thumbs" aria-label="Jump to a service" style={`--cols:${SERVICES.length};--cols-sm:${SERVICES.length > 4 ? 3 : SERVICES.length}`}>
             {SERVICES.map((sv) => <li><a class={sv.tone} href={"#" + sv.slug} title={sv.eyebrow}><svg viewBox="0 0 52 52" aria-hidden="true" focusable="false" set:html={ICONS[sv.slug]} /><span class="sr">{sv.eyebrow}</span></a></li>)}
           </ul>
