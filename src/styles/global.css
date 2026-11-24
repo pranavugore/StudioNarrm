@@ -177,6 +177,7 @@ strong { color: var(--text); font-weight: 650; }
 .served { padding-block: 4.5rem; border-block: 1px solid var(--line); overflow: hidden; }
 .served .wrap { text-align: center; }
 .served h2 { font-size: clamp(1.6rem, 3.5vw, 2.6rem); }
+.served .wrap > p { max-width: 62ch; margin: 1rem auto 2.5rem; color: var(--muted); }
 .marquee { margin-top: 2.2rem; display: flex; gap: 0; overflow: hidden; mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent); }
 .marquee ul { display: flex; gap: 1rem; padding: 0 0.5rem; margin: 0; list-style: none; flex-shrink: 0; animation: slide 38s linear infinite; }
 .marquee li { white-space: nowrap; font-family: var(--f-display); font-weight: 800; font-size: clamp(1.2rem, 2.6vw, 1.8rem); padding: 0.6rem 1.3rem; border: 1px solid var(--line); border-radius: 999px; color: var(--muted); }
